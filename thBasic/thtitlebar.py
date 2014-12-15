@@ -20,10 +20,11 @@ class ThTitleBar(QtGui.QFrame):
 	skinButtonClicked=QtCore.pyqtSignal()
 
 	def initData(self):
+		self.setObjectName('ThTitleBar')
 		#Flase-正常,True-最大化
 		self.maxButtonStatus=True
-		self.maxIcon=QtGui.QIcon('../skin/icons/appbar.fullscreen.box.png')
-		self.normalIcon=QtGui.QIcon('../skin/icons/appbar.app.png')
+		self.maxIcon=QtGui.QIcon('./skin/icons/appbar.fullscreen.box.png')
+		self.normalIcon=QtGui.QIcon('./skin/icons/appbar.app.png')
 
 	def initUI(self):
 		self.setFixedHeight(28)
@@ -34,13 +35,14 @@ class ThTitleBar(QtGui.QFrame):
 		self.minButton=QtGui.QToolButton()
 		self.maxButton=QtGui.QToolButton()
 		self.closeButton=QtGui.QToolButton()
-		self.setToolButtonIcon(self.skinButton, "../skin/icons/appbar.clothes.shirt.png")
-		self.setToolButtonIcon(self.menuButton, "../skin/icons/appbar.control.down.png")
-		self.setToolButtonIcon(self.minButton, "../skin/icons/appbar.minus.png")
-		self.setToolButtonIcon(self.closeButton, "../skin/icons/appbar.close.png")
+		self.setToolButtonIcon(self.skinButton, "./skin/icons/appbar.clothes.shirt.png")
+		self.setToolButtonIcon(self.menuButton, "./skin/icons/appbar.control.down.png")
+		self.setToolButtonIcon(self.minButton, "./skin/icons/appbar.minus.png")
+		self.setToolButtonIcon(self.closeButton, "./skin/icons/appbar.close.png")
 		self.maxButton.setIcon(self.normalIcon)
-		self.maxButton.setIconSize(QtCore.QSize(self.height(),self.height()))
-		
+		#self.maxButton.setIconSize(QtCore.QSize(self.height()-3,self.height()-3))
+		self.maxButton.setIconSize(QtCore.QSize(20,20))
+
 		mainLayout=QtGui.QHBoxLayout()
 		mainLayout.addWidget(self.logoButton)
 		mainLayout.addWidget(self.titleLabel)
@@ -50,7 +52,7 @@ class ThTitleBar(QtGui.QFrame):
 		mainLayout.addWidget(self.minButton)
 		mainLayout.addWidget(self.maxButton)
 		mainLayout.addWidget(self.closeButton)
-		mainLayout.setContentsMargins(4,4,4,0)
+		mainLayout.setContentsMargins(3,3,3,0)
 		mainLayout.setSpacing(0)
 		self.setLayout(mainLayout)
 
@@ -63,18 +65,21 @@ class ThTitleBar(QtGui.QFrame):
 
 	def  setToolButtonIcon(self,toolButton,strIcon):
 		toolButton.setIcon(QtGui.QIcon(strIcon))
-		toolButton.setIconSize(QtCore.QSize(self.height(),self.height()))
+		#toolButton.setIconSize(QtCore.QSize(self.height()-3,self.height()-3))
+		toolButton.setIconSize(QtCore.QSize(20,20))
 
 	def  maxButtonClickedHandler(self):
 		if self.maxButtonStatus:
 			self.maxButtonStatus=False
 			self.maxButton.setIcon(self.maxIcon)
-			self.maxButton.setIconSize(QtCore.QSize(self.height(),self.height()))
+			#self.maxButton.setIconSize(QtCore.QSize(self.height()-3,self.height()-3))
+			self.maxButton.setIconSize(QtCore.QSize(20,20))
 			self.maximumShow.emit()
 		else:
 			self.maxButtonStatus=True
 			self.maxButton.setIcon(self.normalIcon)
-			self.maxButton.setIconSize(QtCore.QSize(self.height(),self.height()))
+			#self.maxButton.setIconSize(QtCore.QSize(self.height()-3,self.height()-3))
+			self.maxButton.setIconSize(QtCore.QSize(20,20))
 			self.normalShow.emit()
 
 	def  mouseDoubleClickEvent(self,e):
@@ -84,7 +89,7 @@ def main():
 	app=QtGui.QApplication(sys.argv)
 	window=ThTitleBar()
 	window.setGeometry(100,100,800,600)
-	window.setWindowTitle('ThTitleBar')
+	#window.setWindowTitle('ThTitleBar')
 	window.show()
 	sys.exit(app.exec_())
 

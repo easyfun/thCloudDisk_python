@@ -26,8 +26,10 @@ class ThFrame(QtGui.QFrame):
 
 		self.titleBar=thtitlebar.ThTitleBar()
 		self.titleBar.setMouseTracking(True)
+
 		self.centralWidget=QtGui.QLabel('centralWidget')
 		self.centralWidget.setMouseTracking(True)
+		
 		mainLayout=QtGui.QVBoxLayout()
 		mainLayout.addWidget(self.titleBar)
 		mainLayout.addWidget(self.centralWidget)
