@@ -170,9 +170,12 @@ class ThFrame(QtGui.QFrame):
 		self.showMaximumStatus=True
 		self.setGeometry(0,0,QtGui.QApplication.desktop().availableGeometry().width(),QtGui.QApplication.desktop().availableGeometry().height())
 
-	def  showNormalSlot(self):
+	def showNormalSlot(self):
 		self.showMaximumStatus=False
 		self.setGeometry(self.rectFrame)
+
+	def getTitleBar(self):
+		return self.titleBar
 
 
 def main():

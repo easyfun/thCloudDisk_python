@@ -6,22 +6,25 @@ from PyQt4 import QtGui
 from PyQt4 import QtCore
 from thBasic import thframe
 from thBasic import thlibs
+#from thBasic import thtitlebar
 
 class ThSkinDialog(thframe.ThFrame):
 	def __init__(self):
 		super(ThSkinDialog,self).__init__()
-#		self.initData()
-#		self.initUI()
-#		self.initConnect()
+		self.initSkinData()
+		self.initSkinUI()
+		self.initSkinConnect()
 
-#	def initData(self):
-#		pass
+	def initSkinData(self):
+		pass
 
-#	def initUI(self):
-#		pass
+	def initSkinUI(self):
+		hideControl=('logoButton','skinButton','menuButton','minButton','maxButton')
+		for hc in hideControl:
+			self.getTitleBar().setControlVisible(hc,False)
 
-#	def initConnect(self):
-#		pass
+	def initSkinConnect(self):
+		pass
 
 def main():
 	app=QtGui.QApplication(sys.argv)

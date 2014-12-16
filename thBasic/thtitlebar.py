@@ -42,6 +42,7 @@ class ThTitleBar(QtGui.QFrame):
 		self.maxButton.setIcon(self.normalIcon)
 		#self.maxButton.setIconSize(QtCore.QSize(self.height()-3,self.height()-3))
 		self.maxButton.setIconSize(QtCore.QSize(20,20))
+		self.controlDict={'titleLabel':self.titleLabel,'logoButton':self.logoButton,'skinButton':self.skinButton,'menuButton':self.menuButton,'minButton':self.minButton,'maxButton':self.maxButton,'maxButton':self.maxButton,'closeButton':self.closeButton}
 
 		mainLayout=QtGui.QHBoxLayout()
 		mainLayout.addWidget(self.logoButton)
@@ -63,12 +64,12 @@ class ThTitleBar(QtGui.QFrame):
 		self.menuButton.clicked.connect(self.menuButtonClicked)
 		self.skinButton.clicked.connect(self.skinButtonClicked)
 
-	def  setToolButtonIcon(self,toolButton,strIcon):
+	def setToolButtonIcon(self,toolButton,strIcon):
 		toolButton.setIcon(QtGui.QIcon(strIcon))
 		#toolButton.setIconSize(QtCore.QSize(self.height()-3,self.height()-3))
 		toolButton.setIconSize(QtCore.QSize(20,20))
 
-	def  maxButtonClickedHandler(self):
+	def maxButtonClickedHandler(self):
 		if self.maxButtonStatus:
 			self.maxButtonStatus=False
 			self.maxButton.setIcon(self.maxIcon)
@@ -82,8 +83,15 @@ class ThTitleBar(QtGui.QFrame):
 			self.maxButton.setIconSize(QtCore.QSize(20,20))
 			self.normalShow.emit()
 
-	def  mouseDoubleClickEvent(self,e):
+	def mouseDoubleClickEvent(self,e):
 		self.maxButtonClickedHandler()
+
+	def setControlVisible(self,controlName,visible):
+		if controlName in self.controlDict:
+			if visible:
+				self.controlDict[controlName].show()
+			else:
+				self.controlDict[controlName].hide()
 
 def main():
 	app=QtGui.QApplication(sys.argv)
