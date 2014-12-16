@@ -93,6 +93,11 @@ class ThTitleBar(QtGui.QFrame):
 			else:
 				self.controlDict[controlName].hide()
 
+	def getControlGeometry(self,controlName):
+		if controlName in self.controlDict:
+			if self.controlDict[controlName].isVisible():
+				return self.controlDict[controlName].geometry()
+
 def main():
 	app=QtGui.QApplication(sys.argv)
 	window=ThTitleBar()

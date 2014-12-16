@@ -16,9 +16,11 @@ class ThFrame(QtGui.QFrame):
 	def initData(self):
 		'''dragDirection:0-left,1-right,2-top,3-bottom,4-topleft,5-topright,6-bottomleft,7-bottomright,8-normal
 		'''
+		self.resizeFrameFlag=True	#缩放窗口大小标志
+		self.dragMoveFrameFlag=True	#拖动窗口位置
 		self.leftMousePress=False
 		self.dragDirection=8
-		self.showMaximumStatus=False
+		self.showMaximumFlag=False 	#最大化显示标志
 
 	def initUI(self):
 		self.setWindowFlags(QtCore.Qt.FramelessWindowHint)
@@ -27,9 +29,10 @@ class ThFrame(QtGui.QFrame):
 		self.titleBar=thtitlebar.ThTitleBar()
 		self.titleBar.setMouseTracking(True)
 
-		self.centralWidget=QtGui.QLabel('centralWidget')
+		self.centralWidget=QtGui.QFrame()#QtGui.QLabel('centralWidget')
 		self.centralWidget.setMouseTracking(True)
-		
+		print(self.centralWidget)
+
 		mainLayout=QtGui.QVBoxLayout()
 		mainLayout.addWidget(self.titleBar)
 		mainLayout.addWidget(self.centralWidget)
@@ -54,8 +57,16 @@ class ThFrame(QtGui.QFrame):
 			self.globalStartPosition=e.globalPos()
 
 	def mouseMoveEvent(self,e):
+		#禁止缩放窗口大小
+		if False==self.resizeFrameFlag:
+			return
+
+		#禁止拖动窗口位置
+		if False==self.dragMoveFrameFlag:
+			return
+
 		if self.leftMousePress:
-			if self.showMaximumStatus:
+			if self.showMaximumFlag:
 				pass
 				#self.setGeometry(self.rectFrame)
 			#移动窗口位置
@@ -69,7 +80,7 @@ class ThFrame(QtGui.QFrame):
 				self.resizeFrame(e.globalX(),e.globalY(),self.dragDirection)
 				self.globalStartPosition=e.globalPos()
 		else:
-			if self.showMaximumStatus:
+			if self.showMaximumFlag:
 				self.setCursorStyle(8)
 			else:
 				self.dragDirection=self.getDragDirection(e.globalX(),e.globalY())
@@ -164,20 +175,31 @@ class ThFrame(QtGui.QFrame):
 		else:
 			self.setCursor(QtCore.Qt.ArrowCursor)
 
-
 	def showMaxSlot(self):
 		self.rectFrame=self.geometry()
-		self.showMaximumStatus=True
+		self.showMaximumFlag=True
 		self.setGeometry(0,0,QtGui.QApplication.desktop().availableGeometry().width(),QtGui.QApplication.desktop().availableGeometry().height())
 
 	def showNormalSlot(self):
-		self.showMaximumStatus=False
+		self.showMaximumFlag=False
 		self.setGeometry(self.rectFrame)
 
 	def getTitleBar(self):
+		'''获取标题栏对象'''
 		return self.titleBar
 
+	def setResizeFrameFlag(self,flag):
+		'''设置窗口缩放'''
+		self.resizeFrameFlag=flag
 
+	def setDragMoveFrameFlag(self,flag):
+		'''设置窗口拖动'''
+		self.dragMoveFrameFlag=flag
+
+	def getCentralWidget(self):
+		'''获取视图对象'''
+		return self.centralWidget
+		
 def main():
 	app=QtGui.QApplication(sys.argv)
 	window=ThFrame()
