@@ -27,10 +27,12 @@ class ThCloudDiskWindow(thframe.ThFrame):
 
 	def skinDialog(self):
 	 	
-	 	#if self.sd:
-	 	#	pass
-	 	#else:
-		#	self.sd=thskindialog.ThSkinDialog()
+	 	if self.sd:
+	 		print('hased')
+	 		pass
+	 	else:
+	 		print('new')
+			self.sd=thskindialog.ThSkinDialog()
 		
 		#self.sd.resize(200,200)
 
@@ -45,7 +47,7 @@ class ThCloudDiskWindow(thframe.ThFrame):
 		
 		#模态对话框主窗口居中显示
 
-		self.sd=thskindialog.ThSkinDialog()
+		#self.sd=thskindialog.ThSkinDialog()
 		#self.sd.setParent(self)
 		self.sd.resize(200,200)
 		rectFG=self.frameGeometry()
