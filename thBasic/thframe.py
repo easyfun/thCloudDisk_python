@@ -58,31 +58,31 @@ class ThFrame(QtGui.QFrame):
 
 	def mouseMoveEvent(self,e):
 		#禁止缩放窗口大小
-		if False==self.resizeFrameFlag:
-			return
+		#if False==self.resizeFrameFlag:
+		#	return
 
 		#禁止拖动窗口位置
-		if False==self.dragMoveFrameFlag:
-			return
+		#if False==self.dragMoveFrameFlag:
+		#	return
 
 		if self.leftMousePress:
 			if self.showMaximumFlag:
 				pass
 				#self.setGeometry(self.rectFrame)
 			#移动窗口位置
-			elif 8==self.dragDirection:
+			elif 8==self.dragDirection and self.dragMoveFrameFlag:
 				rectFrame=self.geometry()
 				self.move(rectFrame.left()+e.globalX()-self.globalStartPosition.x(),
 						rectFrame.top()+e.globalY()-self.globalStartPosition.y())
 				self.globalStartPosition=e.globalPos()
-			else:
+			elif self.resizeFrameFlag:
 				#调整窗口大小
 				self.resizeFrame(e.globalX(),e.globalY(),self.dragDirection)
 				self.globalStartPosition=e.globalPos()
 		else:
 			if self.showMaximumFlag:
 				self.setCursorStyle(8)
-			else:
+			if self.resizeFrameFlag:
 				self.dragDirection=self.getDragDirection(e.globalX(),e.globalY())
 				self.setCursorStyle(self.dragDirection)
 

@@ -16,7 +16,8 @@ class ThSkinDialog(thframe.ThFrame):
 		self.initSkinConnect()
 
 	def initSkinData(self):
-		pass
+		self.setWindowFlags(QtCore.Qt.FramelessWindowHint or QtCore.Qt.QDialog)
+		self.setWindowModality(QtCore.Qt.ApplicationModal)
 
 	def initSkinUI(self):
 		hideControl=('logoButton','skinButton','menuButton','minButton','maxButton')
@@ -24,7 +25,7 @@ class ThSkinDialog(thframe.ThFrame):
 			self.getTitleBar().setControlVisible(hc,False)
 
 		self.setResizeFrameFlag(False)
-		self.setDragMoveFrameFlag(False)
+		#self.setDragMoveFrameFlag(False)
 
 		centralWidget=self.getCentralWidget()
 		print(centralWidget)
@@ -45,7 +46,7 @@ class ThSkinDialog(thframe.ThFrame):
 		gridLayout.setRowStretch(2,1)
 		centralWidget.setLayout(gridLayout)
 
-		self.setGeometry(100,100,200,200)
+		#self.setGeometry(100,100,200,200)
 
 
 	def initSkinConnect(self):
