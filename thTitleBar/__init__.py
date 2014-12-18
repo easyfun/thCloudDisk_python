@@ -4,4 +4,4 @@
 if __name__=='__main__':
 	print('main entry')
 else:
-	print('thFrame package init')
+	print('thThtileBar package init')
