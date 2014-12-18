@@ -82,7 +82,7 @@ class ThFrame(QtGui.QFrame):
 		else:
 			if self.showMaximumFlag:
 				self.setCursorStyle(8)
-			if self.resizeFrameFlag:
+			elif self.resizeFrameFlag:
 				self.dragDirection=self.getDragDirection(e.globalX(),e.globalY())
 				self.setCursorStyle(self.dragDirection)
 

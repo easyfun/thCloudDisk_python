@@ -7,6 +7,7 @@ QFrame#ThTitleBar{
 QFrame#ThTitleBar *{
 	color:blue;
 	background-color:yellow;
+	border-style:none;
 }
 
 QFrame#ThTitleBar QToolButton:hover{

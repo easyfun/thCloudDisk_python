@@ -35,6 +35,7 @@ class ThTitleBar(QtGui.QFrame):
 		self.minButton=QtGui.QToolButton()
 		self.maxButton=QtGui.QToolButton()
 		self.closeButton=QtGui.QToolButton()
+		self.closeButton.setObjectName('closeApplication')
 		self.setToolButtonIcon(self.skinButton, "./skin/icons/appbar.clothes.shirt.png")
 		self.setToolButtonIcon(self.menuButton, "./skin/icons/appbar.control.down.png")
 		self.setToolButtonIcon(self.minButton, "./skin/icons/appbar.minus.png")
