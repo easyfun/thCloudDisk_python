@@ -17,7 +17,7 @@ class ThSkinDialog(thframe.ThFrame):
 		self.installEventFilter(self)
 
 	def initSkinData(self):
-		#self.setWindowFlags(QtCore.Qt.FramelessWindowHint or QtCore.Qt.Popup)
+		#self.setWindowFlags(QtCore.Qt.FramelessWindowHint or QtCore.Qt.Tool)
 		#self.setWindowModality(QtCore.Qt.ApplicationModal)
 		self.setWindowFlags(QtCore.Qt.Popup)
 		pass
@@ -59,7 +59,7 @@ class ThSkinDialog(thframe.ThFrame):
 		if event.type()==QtCore.QEvent.MouseButtonPress:
 			self.close()
 			return True
-		else:
+		else:	
 			return super(ThSkinDialog,self).eventFilter(obj,event)
 
 def main():
