@@ -17,7 +17,7 @@ import thclouddiskwindow
 
 def main():
 	app=QtGui.QApplication(sys.argv)
-	getQss,qss=thlibs.getQssFile('./skin/qss/yellow.qss')
+	getQss,qss=thlibs.getQssFile('./skin/qss/black.qss')
 
 	if getQss:
 		app.setStyleSheet(qss)

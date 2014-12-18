@@ -6,11 +6,12 @@ from PyQt4 import QtGui
 from PyQt4 import QtCore
 
 class ThTitleBar(QtGui.QFrame):
-	def __init__(self):
-		super(ThTitleBar,self).__init__()
+	def __init__(self,parent=None,windowFlags=QtCore.Qt.Widget):
+		super(ThTitleBar,self).__init__(parent,windowFlags)
 		self.initData()
 		self.initUI()
 		self.initConnect()
+		self.setFocusPolicy(QtCore.Qt.NoFocus)
 
 	closeButtonClicked=QtCore.pyqtSignal()
 	minButtonClicked=QtCore.pyqtSignal()
@@ -35,6 +36,16 @@ class ThTitleBar(QtGui.QFrame):
 		self.minButton=QtGui.QToolButton()
 		self.maxButton=QtGui.QToolButton()
 		self.closeButton=QtGui.QToolButton()
+		
+		self.titleLabel.setFocusPolicy(QtCore.Qt.NoFocus)
+		self.logoButton.setFocusPolicy(QtCore.Qt.NoFocus)
+		self.skinButton.setFocusPolicy(QtCore.Qt.NoFocus)
+		self.menuButton.setFocusPolicy(QtCore.Qt.NoFocus)
+		self.minButton.setFocusPolicy(QtCore.Qt.NoFocus)
+		self.maxButton.setFocusPolicy(QtCore.Qt.NoFocus)
+		self.closeButton.setFocusPolicy(QtCore.Qt.NoFocus)
+
+		self.closeButton.setObjectName('closeApplication')
 		self.setToolButtonIcon(self.skinButton, "./skin/icons/appbar.clothes.shirt.png")
 		self.setToolButtonIcon(self.menuButton, "./skin/icons/appbar.control.down.png")
 		self.setToolButtonIcon(self.minButton, "./skin/icons/appbar.minus.png")
@@ -42,7 +53,16 @@ class ThTitleBar(QtGui.QFrame):
 		self.maxButton.setIcon(self.normalIcon)
 		#self.maxButton.setIconSize(QtCore.QSize(self.height()-3,self.height()-3))
 		self.maxButton.setIconSize(QtCore.QSize(20,20))
-		self.controlDict={'titleLabel':self.titleLabel,'logoButton':self.logoButton,'skinButton':self.skinButton,'menuButton':self.menuButton,'minButton':self.minButton,'maxButton':self.maxButton,'maxButton':self.maxButton,'closeButton':self.closeButton}
+		self.controlDict={
+				'titleLabel':self.titleLabel,
+				'logoButton':self.logoButton,
+				'skinButton':self.skinButton,
+				'menuButton':self.menuButton,
+				'minButton':self.minButton,
+				'maxButton':self.maxButton,
+				'maxButton':self.maxButton,
+				'closeButton':self.closeButton
+				}
 
 		mainLayout=QtGui.QHBoxLayout()
 		mainLayout.addWidget(self.logoButton)
@@ -97,6 +117,11 @@ class ThTitleBar(QtGui.QFrame):
 		if controlName in self.controlDict:
 			if self.controlDict[controlName].isVisible():
 				return self.controlDict[controlName].geometry()
+
+	def  getControl(self,controlName):
+		if controlName in self.controlDict:
+			if self.controlDict[controlName].isVisible():
+				return self.controlDict[controlName]
 
 def main():
 	app=QtGui.QApplication(sys.argv)

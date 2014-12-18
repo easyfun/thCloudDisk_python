@@ -7,8 +7,8 @@ from PyQt4 import QtCore
 import thtitlebar
 
 class ThFrame(QtGui.QFrame):
-	def __init__(self):
-		super(ThFrame,self).__init__()
+	def __init__(self,parent=None,windowFlags=0):
+		super(ThFrame,self).__init__(parent,windowFlags)
 		self.initData()
 		self.initUI()
 		self.initConnect()
@@ -82,7 +82,7 @@ class ThFrame(QtGui.QFrame):
 		else:
 			if self.showMaximumFlag:
 				self.setCursorStyle(8)
-			if self.resizeFrameFlag:
+			elif self.resizeFrameFlag:
 				self.dragDirection=self.getDragDirection(e.globalX(),e.globalY())
 				self.setCursorStyle(self.dragDirection)
 
@@ -179,6 +179,20 @@ class ThFrame(QtGui.QFrame):
 		self.rectFrame=self.geometry()
 		self.showMaximumFlag=True
 		self.setGeometry(0,0,QtGui.QApplication.desktop().availableGeometry().width(),QtGui.QApplication.desktop().availableGeometry().height())
+
+		#鼠标点最大化按钮，不移动鼠标，最大化按钮显示状态不正确
+
+		#给最大化按钮发送leaveEnvent事件，更新显示
+		#hoverLeave=QtGui.QHoverEvent(QtCore.QEvent.HoverLeave,QtCore.QPoint(-1,-1),QtCore.QPoint(-1,-1))
+		#if QtGui.QApplication.sendEvent(self.getTitleBar().getControl('maxButton'),hoverLeave):
+		#	print('send hoverLeave ok')
+		
+		#mouseEvent=QtGui.QMouseEvent(QtCore.QEvent.MouseMove,QtCore.QPoint(10,10),
+		#	QtCore.Qt.NoButton,QtCore.Qt.NoButton,QtCore.Qt.NoModifier)
+		#if QtGui.QApplication.sendEvent(self.getTitleBar().getControl('maxButton'),mouseEvent):
+		#	print('send mouseEvent ok')
+
+		self.centralWidget.setFocus(QtCore.Qt.MouseFocusReason)
 
 	def showNormalSlot(self):
 		self.showMaximumFlag=False
