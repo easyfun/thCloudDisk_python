@@ -1,0 +1,19 @@
+/*==========ThTitleBar==========*/
+QFrame#ThTitleBar{
+	color:yellow;
+	background-color:blue;
+}
+
+QFrame#ThTitleBar *{
+	color:yellow;
+	background-color:blue;
+	border-style:none;
+}
+
+QFrame#ThTitleBar QToolButton:hover{
+	background-color:rgb(0,192,192);
+}
+
+QFrame#ThTitleBar QToolButton#closeApplication:hover{
+	background-color:red;
+}

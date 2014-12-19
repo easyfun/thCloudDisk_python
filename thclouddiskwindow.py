@@ -57,8 +57,8 @@ class ThCloudDiskWindow(thframe.ThFrame):
 		#self.setWindowModality(QtCore.Qt.ApplicationModal)
 		
 		self.sd.show()
-#		self.sd.raise_()
-#		self.sd.activateWindow()
+		self.sd.raise_()
+		self.sd.activateWindow()
 
 
 def main():
