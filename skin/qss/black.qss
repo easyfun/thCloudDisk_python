@@ -1,4 +1,4 @@
-/*==========ThTitleBar==========*/
+/****************************ThTitleBar****************************/
 QFrame#ThTitleBar{
 	color:white;
 	background-color:black;
@@ -16,4 +16,11 @@ QFrame#ThTitleBar QToolButton:hover{
 
 QFrame#ThTitleBar QToolButton#closeApplication:hover{
 	background-color:red;
+}
+
+/****************************ThSkinDialog****************************/
+QFrame#ThSkinDialog{
+	border-style:double solid;
+	border-width:1px;
+	border-color:white;
 }

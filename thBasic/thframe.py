@@ -7,7 +7,7 @@ from PyQt4 import QtCore
 import thtitlebar
 
 class ThFrame(QtGui.QFrame):
-	def __init__(self,parent=None,windowFlags=0):
+	def __init__(self,parent=None,windowFlags=QtCore.Qt.Widget):
 		super(ThFrame,self).__init__(parent,windowFlags)
 		self.initData()
 		self.initUI()
@@ -213,6 +213,12 @@ class ThFrame(QtGui.QFrame):
 	def getCentralWidget(self):
 		'''获取视图对象'''
 		return self.centralWidget
+
+	def setTitleBarVisible(self,visible):
+		if visible:
+			self.titleBar.show()
+		else:
+			self.titleBar.hide()
 		
 def main():
 	app=QtGui.QApplication(sys.argv)
