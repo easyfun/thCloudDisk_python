@@ -38,66 +38,19 @@ class ThColorLabel(QtGui.QLabel):
 	def __init__(self,color,application,parent=None,windowFlags=QtCore.Qt.Widget):
 		super(ThColorLabel,self).__init__(parent,windowFlags)
 		self.application=application
-		self.installEventFilter(self)
+		#self.installEventFilter(self)
+		self.installEventFilter(parent)
 		self.color=color
 		self.setFixedSize(120,120)
 		self.setStyleSheet('''QLabel{background-color:%s;}''' % color)
-
-		self.hoverIcon=QtGui.QIcon('./skin/icons/appbar.camera.flash.off.selected.png')
-		self.selectedIcon=QtGui.QIcon('./skin/icons/appbar.camera.flash.auto.selected.png')
 
 		self.selectedButton=PictureButton(self)
 		self.selectedButton.setFixedSize(20,20)
 		self.selectedButton.setStyleSheet('''QToolButton{background-color:%s;border-style:none;}''' % color)
 		self.selectedButton.move(92,92)
 
-		self.selectedButton.hide()
+		#self.selectedButton.hide()
 		self.selectedButton.iconFlag=0
-		
-
-	def eventFilter(self,obj,event):
-		if event.type()==QtCore.QEvent.HoverEnter or\
-			event.type()==QtCore.QEvent.HoverMove or\
-			event.type()==QtCore.QEvent.Enter:
-			if 1 != self.selectedButton.iconFlag:
-				self.selectedButton.setIcon(self.hoverIcon)
-				self.selectedButton.setIconSize(QtCore.QSize(20,20))
-				self.selectedButton.iconFlag=1
-
-			if not self.selectedButton.isVisible():
-				self.selectedButton.show()
-
-			#改变皮肤
-			getQss,qss=thlibs.getQssFile('./skin/qss/%s.qss' % obj.color)
-			if getQss:
-				self.application.setStyleSheet(qss)
-
-			return True
-
-		if event.type()==QtCore.QEvent.HoverLeave or\
-			event.type()==QtCore.QEvent.Leave:
-			if 2==self.selectedButton.iconFlag:
-				self.selectedButton.show()
-			else:
-				self.selectedButton.hide()
-			return True
-
-
-		if event.type()==QtCore.QEvent.MouseButtonPress or\
-			event.type()==QtCore.QEvent.MouseButtonRelease or\
-			event.type()==QtCore.QEvent.MouseButtonDblClick:
-
-			if 2 != self.selectedButton.iconFlag:
-				self.selectedButton.setIcon(self.selectedIcon)
-				self.selectedButton.setIconSize(QtCore.QSize(20,20))
-				self.selectedButton.show()
-				self.selectedButton.iconFlag=2
-
-			return True
-	
-		
-		return super(ThColorLabel,self).eventFilter(obj,event)		
-
 
 class ThSkinDialog(thframe.ThFrame):
 	def __init__(self,application,parent=None,windowFlags=QtCore.Qt.Widget):
@@ -113,8 +66,11 @@ class ThSkinDialog(thframe.ThFrame):
 		#self.setWindowFlags(QtCore.Qt.FramelessWindowHint or QtCore.Qt.Tool)
 		#self.setWindowModality(QtCore.Qt.ApplicationModal)
 		self.setWindowFlags(QtCore.Qt.Popup)
-		self.colorDict={}
-		pass
+		self.themeDict={}
+		self.themeObjList=[]
+		self.themeNameList=[]
+		self.hoverIcon=QtGui.QIcon('./skin/icons/appbar.camera.flash.off.selected.png')
+		self.selectedIcon=QtGui.QIcon('./skin/icons/appbar.camera.flash.auto.selected.png')
 
 	def initSkinUI(self):
 	#	hideControl=('logoButton','skinButton','menuButton','minButton','maxButton')
@@ -129,20 +85,25 @@ class ThSkinDialog(thframe.ThFrame):
 
 		gridLayout=QtGui.QGridLayout()
 
-		colors=['black','blue','purple','green','red','teal']
+		self.themeNameList=['black','blue','purple','green','red','teal']
 		positions=[(i,j) for i in range(2) for j in range(3)]
 
-		for position,color in zip(positions,colors):
-			colorLabel=ThColorLabel(color,self.application)
-			self.colorDict[color]=colorLabel
-			gridLayout.addWidget(colorLabel,*position)
+		for position,themeName in zip(positions,self.themeNameList):
+			themeLabel=ThColorLabel(themeName,self.application,self)
+			self.themeDict[themeName]=themeLabel
+			self.themeObjList.append(themeLabel)
+			gridLayout.addWidget(themeLabel,*position)
 
-		print(self.colorDict)
 		gridLayout.setContentsMargins(4,4,4,4)
 		gridLayout.setSpacing(4)
 		centralWidget.setLayout(gridLayout)
 
-		#self.setGeometry(100,100,200,200)
+		'''系统默认主题teal'''
+		self.currentTheme='teal'
+		self.themeDict['teal'].selectedButton.iconFlag=2
+		self.themeDict['teal'].selectedButton.setIcon(self.selectedIcon)
+		self.themeDict['teal'].selectedButton.setIconSize(QtCore.QSize(20,20))
+		self.themeDict['teal'].selectedButton.show()
 
 	def initSkinConnect(self):
 		pass
@@ -151,8 +112,69 @@ class ThSkinDialog(thframe.ThFrame):
 		if event.type()==QtCore.QEvent.MouseButtonPress:
 			self.close()
 			return True
-		else:	
-			return super(ThSkinDialog,self).eventFilter(obj,event)
+	
+		#return super(ThSkinDialog,self).eventFilter(obj,event)
+	
+		if obj in self.themeObjList:
+			if event.type()==QtCore.QEvent.HoverEnter or\
+				event.type()==QtCore.QEvent.HoverMove or\
+				event.type()==QtCore.QEvent.Enter:
+					if 1 != obj.selectedButton.iconFlag:
+						obj.selectedButton.setIcon(self.hoverIcon)
+						obj.selectedButton.setIconSize(QtCore.QSize(20,20))
+						obj.selectedButton.iconFlag=1
+
+					if not obj.selectedButton.isVisible():
+						obj.selectedButton.show()
+
+					#改变皮肤
+					getQss,qss=thlibs.getQssFile('./skin/qss/%s.qss' % obj.color)
+					if getQss:
+						self.application.setStyleSheet(qss)
+
+					return True
+
+			if event.type()==QtCore.QEvent.HoverLeave or\
+				event.type()==QtCore.QEvent.Leave:
+				if 2==obj.selectedButton.iconFlag or obj==self.themeDict[self.currentTheme]:
+				#if obj==self.themeDict[self.currentTheme]:
+					obj.selectedButton.iconFlag=2
+					obj.selectedButton.setIcon(self.selectedIcon)
+					obj.selectedButton.setIconSize(QtCore.QSize(20,20))
+					obj.selectedButton.show()
+				else:
+					obj.selectedButton.iconFlag=0
+					obj.selectedButton.hide()
+
+					#改变皮肤
+					getQss,qss=thlibs.getQssFile('./skin/qss/%s.qss' % self.currentTheme)
+					if getQss:
+						self.application.setStyleSheet(qss)
+
+				return True
+
+
+			if event.type()==QtCore.QEvent.MouseButtonPress or\
+				event.type()==QtCore.QEvent.MouseButtonRelease or\
+				event.type()==QtCore.QEvent.MouseButtonDblClick:
+
+				if 2 != obj.selectedButton.iconFlag:
+					self.themeDict[self.currentTheme].selectedButton.iconFlag=0
+					self.themeDict[self.currentTheme].selectedButton.hide()
+
+					obj.selectedButton.setIcon(self.selectedIcon)
+					obj.selectedButton.setIconSize(QtCore.QSize(20,20))
+					obj.selectedButton.show()
+					obj.selectedButton.iconFlag=2
+					self.currentTheme=self.themeNameList[self.themeObjList.index(obj)]
+					getQss,qss=thlibs.getQssFile('./skin/qss/%s.qss' % self.currentTheme)
+					if getQss:
+						self.application.setStyleSheet(qss)
+					#obj.selectedTheme=1
+
+				return True
+
+		return super(ThSkinDialog,self).eventFilter(obj,event)
 
 def main():
 	app=QtGui.QApplication(sys.argv)
