@@ -23,7 +23,7 @@ class ThFrame(QtGui.QFrame):
 		self.showMaximumFlag=False 	#最大化显示标志
 
 	def initUI(self):
-		self.setWindowFlags(QtCore.Qt.FramelessWindowHint)
+		self.setWindowFlags(QtCore.Qt.FramelessWindowHint | QtCore.Qt.WindowSystemMenuHint | QtCore.Qt.WindowMinimizeButtonHint)  # 无边框， 带系统菜单， 可以最小化)
 		self.setMouseTracking(True)
 
 		self.titleBar=thtitlebar.ThTitleBar()
