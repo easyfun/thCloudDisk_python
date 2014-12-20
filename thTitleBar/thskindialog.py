@@ -8,9 +8,36 @@ from thBasic import thframe
 from thBasic import thlibs
 #from thBasic import thtitlebar
 
+class PictureButton(QtGui.QToolButton):
+	def __init__(self,parent=None):
+		super(PictureButton,self).__init__(parent)
+		self.eventType=QtCore.QEvent.None
+		self.setFocusPolicy(QtCore.Qt.NoFocus)
+		self.setStyleSheet('QToolButton{border-style:none;}')
+		self.setIcon(QtGui.QIcon('./picture.png'))
+		self.setIconSize(QtCore.QSize(40,40))
+		self.installEventFilter(self)
+		self.iconFlag=0 #0-无ICON,1-hover,2-selected
+
+	def eventFilter(self,obj,event):
+		if event.type()==QtCore.QEvent.HoverEnter or\
+			event.type()==QtCore.QEvent.HoverLeave or\
+			event.type()==QtCore.QEvent.HoverMove or\
+			event.type()==QtCore.QEvent.Leave or\
+			event.type()==QtCore.QEvent.Enter or\
+			event.type()==QtCore.QEvent.KeyPress or\
+			event.type()==QtCore.QEvent.KeyRelease or\
+			event.type()==QtCore.QEvent.MouseButtonPress or\
+			event.type()==QtCore.QEvent.MouseButtonRelease or\
+			event.type()==QtCore.QEvent.MouseButtonDblClick:
+			return True
+
+		return super(PictureButton,self).eventFilter(obj,event)
+
 class ThColorLabel(QtGui.QLabel):
 	def __init__(self,color,parent=None,windowFlags=QtCore.Qt.Widget):
 		super(ThColorLabel,self).__init__(parent,windowFlags)
+		self.installEventFilter(self)
 		self.color=color
 		self.setFixedSize(120,120)
 		self.setStyleSheet('''QLabel{background-color:%s;}''' % color)
@@ -18,19 +45,52 @@ class ThColorLabel(QtGui.QLabel):
 		self.hoverIcon=QtGui.QIcon('./skin/icons/appbar.camera.flash.off.selected.png')
 		self.selectedIcon=QtGui.QIcon('./skin/icons/appbar.camera.flash.auto.selected.png')
 
-		self.selectedButton=QtGui.QToolButton(self)
-		self.selectedButton.installEventFilter(self)
-		
+		self.selectedButton=PictureButton(self)
 		self.selectedButton.setFixedSize(20,20)
 		self.selectedButton.setStyleSheet('''QToolButton{background-color:%s;border-style:none;}''' % color)
-		self.selectedButton.move(100,100)
+		self.selectedButton.move(92,92)
 
-		#self.selectedButton.hide()
+		self.selectedButton.hide()
+		self.selectedButton.iconFlag=0
 		
-		self.selectedButton.setIcon(self.selectedIcon)
-		self.selectedButton.setIconSize(QtCore.QSize(20,20))
 
+	def eventFilter(self,obj,event):
+		if event.type()==QtCore.QEvent.HoverEnter or\
+			event.type()==QtCore.QEvent.HoverMove or\
+			event.type()==QtCore.QEvent.Enter:
+			if 1 != self.selectedButton.iconFlag:
+				self.selectedButton.setIcon(self.hoverIcon)
+				self.selectedButton.setIconSize(QtCore.QSize(20,20))
+				self.selectedButton.iconFlag=1
+
+			if not self.selectedButton.isVisible():
+				self.selectedButton.show()
+			return True
+
+		if event.type()==QtCore.QEvent.HoverLeave or\
+			event.type()==QtCore.QEvent.Leave:
+			if 2==self.selectedButton.iconFlag:
+				self.selectedButton.show()
+			else:
+				self.selectedButton.hide()
+			return True
+
+
+		if event.type()==QtCore.QEvent.MouseButtonPress or\
+			event.type()==QtCore.QEvent.MouseButtonRelease or\
+			event.type()==QtCore.QEvent.MouseButtonDblClick:
+
+			if 2 != self.selectedButton.iconFlag:
+				self.selectedButton.setIcon(self.selectedIcon)
+				self.selectedButton.setIconSize(QtCore.QSize(20,20))
+				self.selectedButton.show()
+				self.selectedButton.iconFlag=2
+
+			return True
+	
 		
+		return super(ThColorLabel,self).eventFilter(obj,event)		
+
 
 class ThSkinDialog(thframe.ThFrame):
 	def __init__(self,parent=None,windowFlags=QtCore.Qt.Widget):
