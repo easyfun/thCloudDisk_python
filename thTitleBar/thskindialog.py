@@ -35,8 +35,9 @@ class PictureButton(QtGui.QToolButton):
 		return super(PictureButton,self).eventFilter(obj,event)
 
 class ThColorLabel(QtGui.QLabel):
-	def __init__(self,color,parent=None,windowFlags=QtCore.Qt.Widget):
+	def __init__(self,color,application,parent=None,windowFlags=QtCore.Qt.Widget):
 		super(ThColorLabel,self).__init__(parent,windowFlags)
+		self.application=application
 		self.installEventFilter(self)
 		self.color=color
 		self.setFixedSize(120,120)
@@ -65,6 +66,12 @@ class ThColorLabel(QtGui.QLabel):
 
 			if not self.selectedButton.isVisible():
 				self.selectedButton.show()
+
+			#改变皮肤
+			getQss,qss=thlibs.getQssFile('./skin/qss/%s.qss' % obj.color)
+			if getQss:
+				self.application.setStyleSheet(qss)
+
 			return True
 
 		if event.type()==QtCore.QEvent.HoverLeave or\
@@ -93,8 +100,9 @@ class ThColorLabel(QtGui.QLabel):
 
 
 class ThSkinDialog(thframe.ThFrame):
-	def __init__(self,parent=None,windowFlags=QtCore.Qt.Widget):
+	def __init__(self,application,parent=None,windowFlags=QtCore.Qt.Widget):
 		super(ThSkinDialog,self).__init__(parent,windowFlags)
+		self.application=application
 		self.initSkinData()
 		self.initSkinUI()
 		self.initSkinConnect()
@@ -113,34 +121,19 @@ class ThSkinDialog(thframe.ThFrame):
 	#	for hc in hideControl:
 	#		self.getTitleBar().setControlVisible(hc,False)
 
-	#	self.setResizeFrameFlag(False)
-		#self.setDragMoveFrameFlag(False)
+		self.setResizeFrameFlag(False)
+		self.setDragMoveFrameFlag(False)
 
 		self.setTitleBarVisible(False)
 		centralWidget=self.getCentralWidget()
 
 		gridLayout=QtGui.QGridLayout()
 
-#		blackSkin=QtGui.QLabel('BlackSkin')
-#		blueSkin=QtGui.QLabel('BlueSkin')
-#		graySkin=QtGui.QLabel('PurpleSkin')
-#		yellowSkin=QtGui.QLabel('YellowSkin')
-#		redSkin=QtGui.QLabel('RedSkin')
-#		tealSkin=QtGui.QLabel('TealSkin')
-
-#		gridLayout.addWidget(blueSkin,0,0)
-#		gridLayout.addWidget(blackSkin,0,1)
-#		gridLayout.addWidget(graySkin,0,2)
-#		gridLayout.addWidget(yellowSkin,1,0)
-#		gridLayout.addWidget(redSkin,1,1)
-#		gridLayout.addWidget(tealSkin,1,2)
-#		gridLayout.setRowStretch(2,1)
-
-		colors=['black','blue','purple','pink','red','teal']
+		colors=['black','blue','purple','green','red','teal']
 		positions=[(i,j) for i in range(2) for j in range(3)]
 
 		for position,color in zip(positions,colors):
-			colorLabel=ThColorLabel(color)
+			colorLabel=ThColorLabel(color,self.application)
 			self.colorDict[color]=colorLabel
 			gridLayout.addWidget(colorLabel,*position)
 

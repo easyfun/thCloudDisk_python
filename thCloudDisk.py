@@ -17,13 +17,13 @@ import thclouddiskwindow
 
 def main():
 	app=QtGui.QApplication(sys.argv)
-	getQss,qss=thlibs.getQssFile('./skin/qss/black.qss')
+	getQss,qss=thlibs.getQssFile('./skin/qss/green.qss')
 
 	if getQss:
 		app.setStyleSheet(qss)
 		pass
 
-	w=thclouddiskwindow.ThCloudDiskWindow()
+	w=thclouddiskwindow.ThCloudDiskWindow(app)
 	w.setGeometry(100,100,800,600)
 	w.show()
 	sys.exit(app.exec_())

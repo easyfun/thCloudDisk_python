@@ -9,8 +9,9 @@ from thBasic import thlibs
 from thTitleBar import thskindialog
 
 class ThCloudDiskWindow(thframe.ThFrame):
-	def __init__(self,parent=None,windowFlags=QtCore.Qt.Widget):
+	def __init__(self,application,parent=None,windowFlags=QtCore.Qt.Widget):
 		super(ThCloudDiskWindow,self).__init__(parent,windowFlags)
+		self.application=application
 		self.initCloudDiskData()
 		self.initCloudDiskUI()
 		self.initCloudDiskConnect()
@@ -30,7 +31,7 @@ class ThCloudDiskWindow(thframe.ThFrame):
 	 	if self.sd:
 	 		pass
 	 	else:
-			self.sd=thskindialog.ThSkinDialog(self)
+			self.sd=thskindialog.ThSkinDialog(self.application,self)
 		
 		#在skinMenu按钮下方以菜单形式显示
 		self.sd.resize(200,200)

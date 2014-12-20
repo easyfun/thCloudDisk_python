@@ -1,0 +1,26 @@
+/****************************ThTitleBar****************************/
+QFrame#ThTitleBar{
+	color:black;
+	background-color:green;
+}
+
+QFrame#ThTitleBar *{
+	color:black;
+	background-color:green;
+	border-style:none;
+}
+
+QFrame#ThTitleBar QToolButton:hover{
+	background-color:rgb(0,192,192);
+}
+
+QFrame#ThTitleBar QToolButton#closeApplication:hover{
+	background-color:red;
+}
+
+/****************************ThSkinDialog****************************/
+QFrame#ThSkinDialog{
+	border-style:double solid;
+	border-width:1px;
+	border-color:white;
+}

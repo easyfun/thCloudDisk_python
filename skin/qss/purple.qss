@@ -1,12 +1,12 @@
 /*==========ThTitleBar==========*/
 QFrame#ThTitleBar{
-	color:blue;
-	background-color:yellow;
+	color:black;
+	background-color:purple;
 }
 
 QFrame#ThTitleBar *{
-	color:blue;
-	background-color:yellow;
+	color:black;
+	background-color:purple;
 	border-style:none;
 }
 
