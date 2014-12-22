@@ -24,3 +24,33 @@ QFrame#ThSkinDialog{
 	border-width:1px;
 	border-color:white;
 }
+
+/****************************ThSkinDialog****************************/
+QFrame#ThToolBar{
+	color:black;
+	background-color:teal;
+}
+
+QFrame#ThToolBar QPushButton{
+	color:black;
+	background-color:purple;
+	border-style:none;
+}
+
+QFrame#ThToolBar QPushButton#HeadPicture{
+	background-image:url(./appbar.group.png);
+	background-repeat:no-repeat;
+	/*background-position:center bottom;*/
+	background-color:transparent;
+	text-align:center bottom;
+	padding-bottom:5px;
+    /*border-bottom: 2px solid black;*/
+}
+
+
+
+
+
+
+
+

@@ -15,30 +15,35 @@ class ThToolBar(QtGui.QFrame):
 
 	def initToolBarData(self):
 		self.setObjectName('ThToolBar')
+		self.buttonDict={}
 		pass
 
 	def initToolBarUI(self):
 		self.setFixedHeight(92)
-		self.headPicButton=QtGui.QToolButton()
-		self.headPicButton.setFixedSize(80,80)
+
+		buttonObjName=('HeadPicture','CloudDisk','CloudAlbum','SharedAlum','LogoPicture')
+		buttonText=('Head Pciture','Cloud Disk','Cloud Album','Shared Alum','Logo Picture')
+		for i in range(5):
+			button=QtGui.QPushButton()
+			if buttonObjName[i]=='logoPicButton':
+				buttonObjName.setFixedSize(120,80)
+			else:
+				button.setFixedSize(80,80)
+				button.setText(buttonText[i])
+			button.setObjectName(buttonObjName[i])
+			button.setFlat(True)
+			button.setCheckable(True)
+			self.buttonDict[buttonObjName[i]]=button
 
 		self.accountComboBox=QtGui.QComboBox()
+		self.accountComboBox.setFixedWidth(160)
 		self.nameLineEdit=QtGui.QLineEdit()
+		self.nameLineEdit.setFixedWidth(116)
 		self.levelLabel=QtGui.QLabel('level 1')
 		self.levelLabel.setFixedWidth(40)
 		self.storageProgress=QtGui.QProgressBar()
+		self.storageProgress.setFixedWidth(160)
 
-		self.cloudDiskButton=QtGui.QToolButton()
-		self.cloudDiskButton.setFixedSize(80,80)
-
-		self.cloudAlbumButton=QtGui.QToolButton()
-		self.cloudAlbumButton.setFixedSize(80,80)
-
-		self.sharedAlbumButton=QtGui.QToolButton()
-		self.sharedAlbumButton.setFixedSize(80,80)
-
-		self.logoPicButton=QtGui.QToolButton()
-		self.logoPicButton.setFixedHeight(80)
 
 		sndLayout=QtGui.QVBoxLayout()
 		sndLayout.addWidget(self.accountComboBox)
@@ -49,24 +54,42 @@ class ThToolBar(QtGui.QFrame):
 		sndLayout.addLayout(trdLayout)
 
 		sndLayout.addWidget(self.storageProgress)
+		sndLayout.setSpacing(4)
 
 		mainLayout=QtGui.QHBoxLayout()
-		mainLayout.addWidget(self.headPicButton)
+		mainLayout.addWidget(self.buttonDict['HeadPicture'])
 		mainLayout.addLayout(sndLayout)
-		mainLayout.addWidget(self.cloudDiskButton)
-		mainLayout.addWidget(self.cloudAlbumButton)
-		mainLayout.addWidget(self.sharedAlbumButton)
-		mainLayout.addWidget(self.logoPicButton)
+		mainLayout.addWidget(self.buttonDict['CloudDisk'])
+		mainLayout.addWidget(self.buttonDict['CloudAlbum'])
+		mainLayout.addWidget(self.buttonDict['SharedAlum'])
+		mainLayout.addStretch()
+		mainLayout.addWidget(self.buttonDict['LogoPicture'])
+		mainLayout.setSpacing(20)
 		self.setLayout(mainLayout)
 
 
 	def initToolBarConnect(self):
 		pass
 
+def getQssFile(qssFile):
+	qss=QtCore.QString('')
+	result=False
 
+	f=QtCore.QFile(qssFile)
+	if f.open(QtCore.QFile.ReadOnly):
+		qss=QtCore.QLatin1String(f.readAll())
+		result=True
+		f.close()
+
+	return result,qss
 
 def main():
 	app=QtGui.QApplication(sys.argv)
+
+	getQss,qss=getQssFile('../skin/qss/teal.qss')
+	if getQss:
+		app.setStyleSheet(qss)
+
 	w=ThToolBar(app)
 	w.setGeometry(100,100,300,94)
 	w.show()
