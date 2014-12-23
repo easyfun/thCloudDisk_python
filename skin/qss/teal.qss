@@ -25,32 +25,139 @@ QFrame#ThSkinDialog{
 	border-color:white;
 }
 
-/****************************ThSkinDialog****************************/
+/****************************ThToolBar****************************/
 QFrame#ThToolBar{
 	color:black;
 	background-color:teal;
 }
 
-QFrame#ThToolBar QPushButton{
+/*QFrame#ThToolBar QPushButton{
 	color:black;
 	background-color:purple;
 	border-style:none;
-}
+}*/
 
-QFrame#ThToolBar QPushButton#HeadPicture{
-	background-image:url(./appbar.group.png);
+QPushButton#HeadPicture{
+	background-image:url(./skin/icons/appbar.group.png);
 	background-repeat:no-repeat;
-	/*background-position:center bottom;*/
+	background-position:center bottom;
 	background-color:transparent;
 	text-align:center bottom;
 	padding-bottom:5px;
-    /*border-bottom: 2px solid black;*/
+    border-bottom: 2px solid black;
+    border-style:none;
+ }
+
+QPushButton#HeadPicture:hover{
+ 	background-color:lightgreen;
+ 	border:1px solid black;
+ }
+
+QPushButton#HeadPicture:checked{
+	background-color:#00CD00;
+	color:white;
 }
 
+QPushButton#HeadPicture:flat{
+	border:none;
+}
 
+QPushButton#CloudDisk{
+	background-image:url(./skin/icons/appbar.layer.png);
+	background-repeat:no-repeat;
+	background-position:center bottom;
+	background-color:transparent;
+	text-align:center bottom;
+	padding-bottom:5px;
+    border-bottom: 2px solid black;
+    border-style:none;
+ }
 
+QPushButton#CloudDisk:hover{
+ 	background-color:lightgreen;
+ 	border:1px solid black;
+ }
 
+QPushButton#CloudDisk:checked{
+	background-color:#00CD00;
+	color:white;
+}
 
+QPushButton#CloudDisk:flat{
+	border:none;
+}
 
+QPushButton#CloudAlbum{
+	background-image:url(./skin/icons/appbar.link.png);
+	background-repeat:no-repeat;
+	background-position:center bottom;
+	background-color:transparent;
+	text-align:center bottom;
+	padding-bottom:5px;
+    border-bottom: 2px solid black;
+    border-style:none;
+ }
 
+QPushButton#CloudAlbum:hover{
+ 	background-color:lightgreen;
+ 	border:1px solid black;
+ }
 
+QPushButton#CloudAlbum:checked{
+	background-color:#00CD00;
+	color:white;
+}
+
+QPushButton#CloudAlbum:flat{
+	border:none;
+}
+
+QPushButton#SharedAlum{
+	background-image:url(./skin/icons/appbar.location.png);
+	background-repeat:no-repeat;
+	background-position:center bottom;
+	background-color:transparent;
+	text-align:center bottom;
+	padding-bottom:5px;
+    border-bottom: 2px solid black;
+    border-style:none;
+ }
+
+QPushButton#SharedAlum:hover{
+ 	background-color:lightgreen;
+ 	border:1px solid black;
+ }
+
+QPushButton#SharedAlum:checked{
+	background-color:#00CD00;
+	color:white;
+}
+
+QPushButton#SharedAlum:flat{
+	border:none;
+}
+
+QPushButton#LogoPicture{
+	background-image:url(./skin/icons/appbar.loop.png);
+	background-repeat:no-repeat;
+	background-position:center bottom;
+	background-color:transparent;
+	text-align:center bottom;
+	padding-bottom:5px;
+    border-bottom: 2px solid black;
+    border-style:none;
+ }
+
+QPushButton#LogoPicture:hover{
+ 	background-color:lightgreen;
+ 	border:1px solid black;
+ }
+
+QPushButton#LogoPicture:checked{
+	background-color:#00CD00;
+	color:white;
+}
+
+QPushButton#LogoPicture:flat{
+	border:none;
+}

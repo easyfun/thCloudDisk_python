@@ -26,7 +26,7 @@ class ThToolBar(QtGui.QFrame):
 		for i in range(5):
 			button=QtGui.QPushButton()
 			if buttonObjName[i]=='logoPicButton':
-				buttonObjName.setFixedSize(120,80)
+				button.setFixedSize(120,80)
 			else:
 				button.setFixedSize(80,80)
 				button.setText(buttonText[i])
@@ -34,6 +34,15 @@ class ThToolBar(QtGui.QFrame):
 			button.setFlat(True)
 			button.setCheckable(True)
 			self.buttonDict[buttonObjName[i]]=button
+
+#		self.buttonDict['HeadPicture'].setStyleSheet('''QPushButton{
+#					background-image:url(../skin/icons/appbar.group.png);
+#					background-repeat:no-repeat;
+#					background-position:center top;
+#					background-color:transparent;
+#					text-align:center bottom;
+#					padding-bottom:5px;
+#					border-bottom: 2px solid black;}''')
 
 		self.accountComboBox=QtGui.QComboBox()
 		self.accountComboBox.setFixedWidth(160)
@@ -56,6 +65,7 @@ class ThToolBar(QtGui.QFrame):
 		sndLayout.addWidget(self.storageProgress)
 		sndLayout.setSpacing(4)
 
+
 		mainLayout=QtGui.QHBoxLayout()
 		mainLayout.addWidget(self.buttonDict['HeadPicture'])
 		mainLayout.addLayout(sndLayout)
@@ -69,7 +79,15 @@ class ThToolBar(QtGui.QFrame):
 
 
 	def initToolBarConnect(self):
-		pass
+		for objName,button in self.buttonDict.items():
+			button.clicked.connect(self.buttonCheckedSlot)
+
+
+	def buttonCheckedSlot(self):
+		self.sender().setChecked(True)
+		for objName,button in self.buttonDict.items():
+			if button is not self.sender():
+				button.setChecked(False)
 
 def getQssFile(qssFile):
 	qss=QtCore.QString('')

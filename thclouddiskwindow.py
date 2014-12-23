@@ -7,6 +7,7 @@ from PyQt4 import QtCore
 from thBasic import thframe
 from thBasic import thlibs
 from thTitleBar import thskindialog
+from thCentralWidget import thtoolbar
 
 class ThCloudDiskWindow(thframe.ThFrame):
 	def __init__(self,application,parent=None,windowFlags=QtCore.Qt.Widget):
@@ -20,7 +21,13 @@ class ThCloudDiskWindow(thframe.ThFrame):
 		self.sd=None
 
 	def initCloudDiskUI(self):
-		pass
+		self.toolbar=thtoolbar.ThToolBar(self.application,self)
+		self.pageView=QtGui.QLabel('Welcome to CloudDisk')#QtGui.QFrame()
+		mainLayout=QtGui.QVBoxLayout()
+		mainLayout.addWidget(self.toolbar)
+		mainLayout.addWidget(self.pageView)
+		mainLayout.setContentsMargins(0,0,0,0)
+		self.getCentralWidget().setLayout(mainLayout)
 
 	def initCloudDiskConnect(self):
 		self.titleBar.skinButtonClicked.connect(self.skinDialog)
