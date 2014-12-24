@@ -4,4 +4,4 @@
 if __name__=='__main__':
 	print('package main entry')
 else:
-	print('package init')
+	print('thToolBar init')

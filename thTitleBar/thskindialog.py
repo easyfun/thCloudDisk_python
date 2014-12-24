@@ -4,8 +4,8 @@
 import sys
 from PyQt4 import QtGui
 from PyQt4 import QtCore
-from thBasic import thframe
-from thBasic import thlibs
+from thFrame import thframe
+from thLib import thlib
 #from thBasic import thtitlebar
 
 class PictureButton(QtGui.QToolButton):
@@ -128,7 +128,7 @@ class ThSkinDialog(thframe.ThFrame):
 						obj.selectedButton.show()
 
 					#改变皮肤
-					getQss,qss=thlibs.getQssFile('./skin/qss/%s.qss' % obj.color)
+					getQss,qss=thlib.getQssFile('./skin/qss/%s.qss' % obj.color)
 					if getQss:
 						self.application.setStyleSheet(qss)
 
@@ -147,7 +147,7 @@ class ThSkinDialog(thframe.ThFrame):
 					obj.selectedButton.hide()
 
 					#改变皮肤
-					getQss,qss=thlibs.getQssFile('./skin/qss/%s.qss' % self.currentTheme)
+					getQss,qss=thlib.getQssFile('./skin/qss/%s.qss' % self.currentTheme)
 					if getQss:
 						self.application.setStyleSheet(qss)
 
@@ -167,7 +167,7 @@ class ThSkinDialog(thframe.ThFrame):
 					obj.selectedButton.show()
 					obj.selectedButton.iconFlag=2
 					self.currentTheme=self.themeNameList[self.themeObjList.index(obj)]
-					getQss,qss=thlibs.getQssFile('./skin/qss/%s.qss' % self.currentTheme)
+					getQss,qss=thlib.getQssFile('./skin/qss/%s.qss' % self.currentTheme)
 					if getQss:
 						self.application.setStyleSheet(qss)
 					#obj.selectedTheme=1

@@ -4,8 +4,8 @@
 import sys
 from PyQt4 import QtGui
 from PyQt4 import QtCore
-from thBasic import thframe
-from thBasic import thlibs
+from thFrame import thframe
+from thLib import thlib
 from thTitleBar import thskindialog
 from thToolBar import thtoolbar
 

@@ -4,19 +4,19 @@
 import sys
 from PyQt4 import QtGui
 from PyQt4 import QtCore
-from thBasic import thframe
-from thBasic import thlibs
-import thclouddiskwindow
+from thFrame import thframe
+from thLib import thlib
+from thclouddiskwindow import ThCloudDiskWindow
 
 def main():
 	app=QtGui.QApplication(sys.argv)
-	getQss,qss=thlibs.getQssFile('./skin/qss/teal.qss')
+	getQss,qss=thlib.getQssFile('./skin/qss/teal.qss')
 
 	if getQss:
 		app.setStyleSheet(qss)
 		pass
 
-	w=thclouddiskwindow.ThCloudDiskWindow(app)
+	w=ThCloudDiskWindow(app)
 	w.setGeometry(100,100,800,600)
 	w.show()
 	sys.exit(app.exec_())
