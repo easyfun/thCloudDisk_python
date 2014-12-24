@@ -8,13 +8,6 @@ from thBasic import thframe
 from thBasic import thlibs
 import thclouddiskwindow
 
-#class ThCloudDiskWindow(thframe.ThFrame):
-#	def __init__(self):
-#		super(ThCloudDiskWindow,self).__init__()
-#		self.initData()
-#		self.initUI()
-#		self.initConnect()
-
 def main():
 	app=QtGui.QApplication(sys.argv)
 	getQss,qss=thlibs.getQssFile('./skin/qss/teal.qss')

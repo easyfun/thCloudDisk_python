@@ -7,7 +7,7 @@ from PyQt4 import QtCore
 from thBasic import thframe
 from thBasic import thlibs
 from thTitleBar import thskindialog
-from thCentralWidget import thtoolbar
+from thToolBar import thtoolbar
 
 class ThCloudDiskWindow(thframe.ThFrame):
 	def __init__(self,application,parent=None,windowFlags=QtCore.Qt.Widget):
@@ -26,7 +26,7 @@ class ThCloudDiskWindow(thframe.ThFrame):
 		self.toolbar=thtoolbar.ThToolBar(self.application,self)
 		self.toolbar.setMouseTracking(True)
 
-		self.pageView=QtGui.QStackedWidget() #QtGui.QLabel('Welcome to CloudDisk')#QtGui.QFrame()
+		self.pageView=QtGui.QStackedWidget()
 		self.pageView.setMouseTracking(True)
 
 		pageviews=('CloudDisk','CloudAlbum','SharedAlum','AllFuction')
