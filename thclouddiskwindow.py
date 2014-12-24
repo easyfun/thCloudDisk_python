@@ -19,18 +19,48 @@ class ThCloudDiskWindow(thframe.ThFrame):
 
 	def initCloudDiskData(self):
 		self.sd=None
+		self.pageViewDict={}
+		self.pageIndexDict={}
 
 	def initCloudDiskUI(self):
 		self.toolbar=thtoolbar.ThToolBar(self.application,self)
-		self.pageView=QtGui.QLabel('Welcome to CloudDisk')#QtGui.QFrame()
+		self.toolbar.setMouseTracking(True)
+
+		self.pageView=QtGui.QStackedWidget() #QtGui.QLabel('Welcome to CloudDisk')#QtGui.QFrame()
+		self.pageView.setMouseTracking(True)
+
+		pageviews=('CloudDisk','CloudAlbum','SharedAlum','AllFuction')
+		for view,index in zip(pageviews,range(len(pageviews))):
+			pv=QtGui.QLabel(view)
+			strView=QtCore.QString(view)
+			self.pageViewDict[strView]=pv
+			self.pageIndexDict[strView]=index
+			self.pageView.addWidget(pv)
+
 		mainLayout=QtGui.QVBoxLayout()
 		mainLayout.addWidget(self.toolbar)
 		mainLayout.addWidget(self.pageView)
 		mainLayout.setContentsMargins(0,0,0,0)
 		self.getCentralWidget().setLayout(mainLayout)
 
+		self.toolbar.setButtonChecked('CloudDisk')
+		self.pageView.setCurrentIndex(0)
+
 	def initCloudDiskConnect(self):
 		self.titleBar.skinButtonClicked.connect(self.skinDialog)
+		for objName,button in self.toolbar.buttonDict.items():
+			if objName!='HeadPicture':
+				button.clicked.connect(self.buttonCheckedSlot)
+
+	def buttonCheckedSlot(self):
+		objectName=self.sender().objectName()
+		if objectName in self.pageIndexDict:
+			self.pageView.setCurrentIndex(self.pageIndexDict[objectName])
+#			pageviews=('HeadPicture','CloudDisk','CloudAlbum','SharedAlum','AllFuction')
+#			for i in range(len(pageviews)):
+#				if pageviews[i]==self.sender().objectName():
+#					self.pageView.setCurrentIndex(i)
+#					break
 
 
 	def skinDialog(self):

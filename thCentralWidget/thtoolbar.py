@@ -21,15 +21,14 @@ class ThToolBar(QtGui.QFrame):
 	def initToolBarUI(self):
 		self.setFixedHeight(92)
 
-		buttonObjName=('HeadPicture','CloudDisk','CloudAlbum','SharedAlum','LogoPicture')
-		buttonText=('Head Pciture','Cloud Disk','Cloud Album','Shared Alum','Logo Picture')
-		for i in range(5):
+#		buttonObjName=('HeadPicture','CloudDisk','CloudAlbum','SharedAlum','LogoPicture')
+#		buttonText=('Head Pciture','Cloud Disk','Cloud Album','Shared Alum','Logo Picture')
+		buttonObjName=('HeadPicture','CloudDisk','CloudAlbum','SharedAlum','AllFuction')
+		buttonText=('Head Pciture','Cloud Disk','Cloud Album','Shared Alum','AllFuction')
+		for i in range(len(buttonObjName)):
 			button=QtGui.QPushButton()
-			if buttonObjName[i]=='logoPicButton':
-				button.setFixedSize(120,80)
-			else:
-				button.setFixedSize(80,80)
-				button.setText(buttonText[i])
+			button.setFixedSize(80,80)
+			button.setText(buttonText[i])
 			button.setObjectName(buttonObjName[i])
 			button.setFlat(True)
 			button.setCheckable(True)
@@ -43,6 +42,9 @@ class ThToolBar(QtGui.QFrame):
 #					text-align:center bottom;
 #					padding-bottom:5px;
 #					border-bottom: 2px solid black;}''')
+
+		self.buttonDict['HeadPicture'].setFocusPolicy(QtCore.Qt.NoFocus)
+		self.buttonDict['HeadPicture'].setCursor(QtCore.Qt.PointingHandCursor)
 
 		self.accountComboBox=QtGui.QComboBox()
 		self.accountComboBox.setFixedWidth(160)
@@ -72,22 +74,29 @@ class ThToolBar(QtGui.QFrame):
 		mainLayout.addWidget(self.buttonDict['CloudDisk'])
 		mainLayout.addWidget(self.buttonDict['CloudAlbum'])
 		mainLayout.addWidget(self.buttonDict['SharedAlum'])
+		mainLayout.addWidget(self.buttonDict['AllFuction'])
 		mainLayout.addStretch()
-		mainLayout.addWidget(self.buttonDict['LogoPicture'])
+#		mainLayout.addWidget(self.buttonDict['LogoPicture'])
 		mainLayout.setSpacing(20)
 		self.setLayout(mainLayout)
 
 
 	def initToolBarConnect(self):
 		for objName,button in self.buttonDict.items():
-			button.clicked.connect(self.buttonCheckedSlot)
+			if objName!='HeadPicture':
+				button.clicked.connect(self.buttonCheckedSlot)
 
 
 	def buttonCheckedSlot(self):
-		self.sender().setChecked(True)
-		for objName,button in self.buttonDict.items():
-			if button is not self.sender():
-				button.setChecked(False)
+		if self.sender()!=self.buttonDict['HeadPicture']:
+			self.sender().setChecked(True)
+			for objName,button in self.buttonDict.items():
+				if button is not self.sender():
+					button.setChecked(False)
+
+	def setButtonChecked(self,buttonName):
+		if buttonName in self.buttonDict:
+			self.buttonDict[buttonName].setChecked(True)
 
 def getQssFile(qssFile):
 	qss=QtCore.QString('')
