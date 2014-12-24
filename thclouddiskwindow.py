@@ -8,6 +8,10 @@ from thFrame import thframe
 from thLib import thlib
 from thTitleBar import thskindialog
 from thToolBar import thtoolbar
+from thPageView.thviewclouddisk import thViewCloudDisk
+from thPageView.thviewcloudalbum import thViewCloudAlbum
+from thPageView.thviewsharedalbum import thViewSharedAlbum
+from thPageView.thviewallfunction import thViewAllFunction
 
 class ThCloudDiskWindow(thframe.ThFrame):
 	def __init__(self,application,parent=None,windowFlags=QtCore.Qt.Widget):
@@ -29,13 +33,37 @@ class ThCloudDiskWindow(thframe.ThFrame):
 		self.pageView=QtGui.QStackedWidget()
 		self.pageView.setMouseTracking(True)
 
-		pageviews=('CloudDisk','CloudAlbum','SharedAlum','AllFuction')
-		for view,index in zip(pageviews,range(len(pageviews))):
-			pv=QtGui.QLabel(view)
-			strView=QtCore.QString(view)
-			self.pageViewDict[strView]=pv
-			self.pageIndexDict[strView]=index
-			self.pageView.addWidget(pv)
+		#pageviews=('CloudDisk','CloudAlbum','SharedAlum','AllFuction')
+		#for view,index in zip(pageviews,range(len(pageviews))):
+		#	pv=QtGui.QLabel(view)
+		#	strView=QtCore.QString(view)
+		#	self.pageViewDict[strView]=pv
+		#	self.pageIndexDict[strView]=index
+		#	self.pageView.addWidget(pv)
+
+		pv=thViewCloudDisk(self.application)
+		strView=QtCore.QString('CloudDisk')
+		self.pageViewDict[strView]=pv
+		self.pageIndexDict[strView]=0
+		self.pageView.addWidget(pv)
+
+		pv=thViewCloudAlbum(self.application)
+		strView=QtCore.QString('CloudAlbum')
+		self.pageViewDict[strView]=pv
+		self.pageIndexDict[strView]=1
+		self.pageView.addWidget(pv)
+
+		pv=thViewSharedAlbum(self.application)
+		strView=QtCore.QString('SharedAlum')
+		self.pageViewDict[strView]=pv
+		self.pageIndexDict[strView]=2
+		self.pageView.addWidget(pv)
+
+		pv=thViewAllFunction(self.application)
+		strView=QtCore.QString('AllFuction')
+		self.pageViewDict[strView]=pv
+		self.pageIndexDict[strView]=3
+		self.pageView.addWidget(pv)
 
 		mainLayout=QtGui.QVBoxLayout()
 		mainLayout.addWidget(self.toolbar)
