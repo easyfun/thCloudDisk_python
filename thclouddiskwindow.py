@@ -69,6 +69,7 @@ class ThCloudDiskWindow(thframe.ThFrame):
 		mainLayout.addWidget(self.toolbar)
 		mainLayout.addWidget(self.pageView)
 		mainLayout.setContentsMargins(0,0,0,0)
+		mainLayout.setSpacing(0)
 		self.getCentralWidget().setLayout(mainLayout)
 
 		self.toolbar.setButtonChecked('CloudDisk')

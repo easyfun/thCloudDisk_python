@@ -4,6 +4,7 @@
 import sys
 from PyQt4 import QtGui
 from PyQt4 import QtCore
+from pvclouddisk import allfiles
 
 class thViewCloudDisk(QtGui.QFrame):
 	def __init__(self,application,parent=None,windowFlag=QtCore.Qt.Widget):
@@ -17,13 +18,25 @@ class thViewCloudDisk(QtGui.QFrame):
 		pass
 
 	def initViewUI(self):
-		label=QtGui.QLabel('View Cloud Disk')
+		self.listWidget=QtGui.QListWidget()
+		self.listWidget.setFixedWidth(200)
+		self.statckedWidget=QtGui.QStackedWidget()
 		mainLayout=QtGui.QHBoxLayout()
-		mainLayout.addWidget(label)
+		mainLayout.addWidget(self.listWidget)
+		mainLayout.addWidget(self.statckedWidget)
+		mainLayout.setContentsMargins(0,0,0,0)
+		mainLayout.setSpacing(0)
 		self.setLayout(mainLayout)
 
+		strItems=('All Files','Files','Music','Vedio','Photograph','From Browser','My Shared','Safe Box','Recycle Bin','History')
+		for stritem in strItems:
+			self.listWidget.addItem(stritem)
+
+		self.pvAllFiles=allfiles.AllFiles(self.application)
+		self.statckedWidget.addWidget(self.pvAllFiles)
+
 	def initViewConnect(self):
-		pass
+		self.listWidget.currentRowChanged.connect(self.statckedWidget.setCurrentIndex)
 
 def main():
 	app=QtGui.QApplication(sys.argv)
