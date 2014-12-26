@@ -187,3 +187,8 @@ QPushButton#LogoPicture:checked{
 QPushButton#LogoPicture:flat{
 	border:none;
 }
+
+/********************************PageView************************************/
+QListWidget#CloudDiskListWidget{
+	background-color:white;
+}
