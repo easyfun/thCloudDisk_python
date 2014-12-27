@@ -9,6 +9,7 @@ class AllFiles(QtGui.QFrame):
 	def __init__(self,application,parent=None,windowsFlag=QtCore.Qt.Widget):
 		super(AllFiles,self).__init__(parent,windowsFlag)
 		self.application=application
+		self.setObjectName('ViewCloudDiskAllFiles')
 		self.initAllFilesData()
 		self.initAllFilesUI()
 		self.initAllFilesConnect()
@@ -17,37 +18,92 @@ class AllFiles(QtGui.QFrame):
 		pass
 
 	def initAllFilesUI(self):
+		height=26
 		self.homeButton=QtGui.QToolButton()
+		self.homeButton.setObjectName('ViewCloudDiskToolButton')
+		self.homeButton.setFixedHeight(height)
+		self.setToolButtonIcon(self.homeButton,'./thPageView/pvclouddisk/appbar.home.png')
+
 		self.backButton=QtGui.QToolButton()
+		self.backButton.setObjectName('ViewCloudDiskToolButton')
+		self.backButton.setFixedHeight(height)
+		self.setToolButtonIcon(self.backButton,'./thPageView/pvclouddisk/appbar.arrow.left.png')
+
 		self.forwordButton=QtGui.QToolButton()
+		self.forwordButton.setObjectName('ViewCloudDiskToolButton')
+		self.forwordButton.setFixedHeight(height)
+		self.setToolButtonIcon(self.forwordButton,'./thPageView/pvclouddisk/appbar.arrow.right.png')
+
 		self.pathComboBox=QtGui.QComboBox()
+		self.pathComboBox.setFixedHeight(height)
 		self.refreshButton=QtGui.QToolButton()
+		self.refreshButton.setObjectName('ViewCloudDiskRefreshButton')
+		self.refreshButton.setFixedHeight(height)
+		self.setToolButtonIcon(self.refreshButton,'./thPageView/pvclouddisk/appbar.refresh.png')
+
 		self.searchEdit=QtGui.QLineEdit()
+		self.searchEdit.setFixedWidth(200)
+		self.searchEdit.setFixedHeight(height)
+
 		topLayout=QtGui.QHBoxLayout()
 		topLayout.addWidget(self.homeButton)
 		topLayout.addWidget(self.backButton)
 		topLayout.addWidget(self.forwordButton)
-		topLayout.addWidget(self.pathComboBox)
+
+		topChildLayout=QtGui.QHBoxLayout()
+		topChildLayout.addWidget(self.pathComboBox)
+		topChildLayout.addWidget(self.refreshButton)
+	#	topLayout.addWidget(self.pathComboBox)
+	#	topLayout.setStretch(3,1)
+	#	topLayout.addWidget(self.refreshButton)
+		topChildLayout.setContentsMargins(0,0,0,0)
+		topChildLayout.setSpacing(1)
+		topLayout.addLayout(topChildLayout)
 		topLayout.setStretch(3,1)
-		topLayout.addWidget(self.refreshButton)
+
 		topLayout.addWidget(self.searchEdit)
 		topLayout.setContentsMargins(5,2,2,0)
 
+		height2=24
 		self.uploadButton=QtGui.QToolButton()
-		self.uploadButton.setText('Upload File')
+		self.uploadButton.setFixedHeight(height2)
+		#self.uploadButton.setObjectName('ViewCloudDiskUploadButton')
+		self.uploadButton.setObjectName('ViewCloudDiskToolButton')
+		self.uploadButton.setText('UpFile')
+
 		self.newButton=QtGui.QToolButton()
+		self.newButton.setFixedHeight(height2)
+		self.newButton.setObjectName('ViewCloudDiskToolButton')
 		self.newButton.setText('New')
+
 		self.downloadButton=QtGui.QToolButton()
-		self.downloadButton.setText('Download')
+		self.downloadButton.setFixedHeight(height2)
+		self.downloadButton.setObjectName('ViewCloudDiskToolButton')
+		self.downloadButton.setText('DownFile')
+
 		self.deleteButton=QtGui.QToolButton()
+		self.deleteButton.setFixedHeight(height2)
+		self.deleteButton.setObjectName('ViewCloudDiskToolButton')
 		self.deleteButton.setText('Delete')
+		
 		self.shareButton=QtGui.QToolButton()
+		self.shareButton.setFixedHeight(height2)
+		self.shareButton.setObjectName('ViewCloudDiskToolButton')
 		self.shareButton.setText('Share')
+		
 		self.sortButton=QtGui.QToolButton()
+		self.sortButton.setFixedHeight(height2)
+		self.sortButton.setObjectName('ViewCloudDiskToolButton')
 		self.sortButton.setText('Sort')
+		
 		self.viewButton=QtGui.QToolButton()
+		self.viewButton.setFixedHeight(height2)
+		self.viewButton.setObjectName('ViewCloudDiskToolButton')
 		self.viewButton.setText('View')
+
+		toolGroup=QtGui.QGroupBox()
 		toolLayout=QtGui.QHBoxLayout()
+		toolLayout.setObjectName('ToolLayout')
 		toolLayout.addWidget(self.uploadButton)
 		toolLayout.addWidget(self.newButton)
 		toolLayout.addWidget(self.downloadButton)
@@ -56,11 +112,13 @@ class AllFiles(QtGui.QFrame):
 		toolLayout.addStretch()
 		toolLayout.addWidget(self.sortButton)
 		toolLayout.addWidget(self.viewButton)
-		toolLayout.setContentsMargins(5,2,2,0)
+		toolLayout.setContentsMargins(5,2,2,2)
+		toolGroup.setLayout(toolLayout)
 
 		mainLayout=QtGui.QVBoxLayout()
 		mainLayout.addLayout(topLayout)
-		mainLayout.addLayout(toolLayout)
+		#mainLayout.addLayout(toolLayout)
+		mainLayout.addWidget(toolGroup)
 		mainLayout.addStretch()
 		mainLayout.setContentsMargins(0,0,0,0)
 		mainLayout.setSpacing(4)
@@ -69,3 +127,7 @@ class AllFiles(QtGui.QFrame):
 
 	def initAllFilesConnect(self):
 		pass
+
+	def setToolButtonIcon(self,toolButton,strIcon):
+		toolButton.setIcon(QtGui.QIcon(strIcon))
+		toolButton.setIconSize(QtCore.QSize(26,26))
