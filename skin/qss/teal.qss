@@ -226,7 +226,7 @@ QFrame#ViewCloudDiskAllFiles{
 }
 
 QToolButton#ViewCloudDiskToolButton {
-	border:none 1px solid #8f8f91;
+border:none 1px solid #8f8f91;
 	border-radius:2px;
 }
 
@@ -238,16 +238,24 @@ QToolButton#ViewCloudDiskToolButton:hover {
 	border:1px solid #8f8f91;
 }
 
-QToolButton#ViewCloudDiskUploadButton {
- 	/*background-image:url(./thPageView/pvclouddisk/appbar.upload.png);
+/*QToolButton#ViewCloudDiskUploadButton {
+ 	background-image:url(./thPageView/pvclouddisk/upload.file.png);
  	background-repeat:no-repeat;
  	background-position:left;
  	background-color:transparent;
- 	text-align:right;*/
+ 	text-align:right;
  	border:none 1px solid #8f8f91;
 }
 
+QToolButton#ViewCloudDiskUploadButton:hover {
+ 	border:1px solid #8f8f91;
+ }*/
 
+QGroupBox#ViewCloudDiskToolGroup{
+	/*border:1px solid #8f8f91;*/
+	border-top:1px solid #8f8f91;
+	border-bottom:1px solid #8f8f91;
+}
 
 /********************************布局管理器***********************************/
 QHBoxLayout#ToolLayout{
