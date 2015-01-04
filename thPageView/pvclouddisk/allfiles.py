@@ -115,6 +115,21 @@ class AllFiles(QtGui.QFrame):
 		self.viewButton.setText('View')
 		self.viewButton.setIcon(QtGui.QIcon('./thPageView/pvclouddisk/appbar.list.png'))
 
+		self.listWidget=QtGui.QListWidget()
+		self.listWidget.setObjectName('ViewCloudDiskListWidget')
+		self.listWidget.setIconSize(QtCore.QSize(50,50))
+		self.listWidget.setFocusPolicy(QtCore.Qt.NoFocus)
+		self.listWidget.setEditTriggers(QtGui.QAbstractItemView.SelectedClicked)
+		self.listWidget.setViewMode(QtGui.QListView.IconMode)
+		self.listWidget.setResizeMode(QtGui.QListView.Adjust)
+
+		itemName='Upload'
+		item=QtGui.QListWidgetItem(itemName,self.listWidget)
+		item.setIcon(QtGui.QIcon('./thPageView/pvclouddisk/appbar.add.png'))
+		item.setFlags(QtCore.Qt.ItemIsEnabled)
+		item.setSizeHint(QtCore.QSize(70,70))
+		item.setTextAlignment(QtCore.Qt.AlignCenter)
+
 		toolGroup=QtGui.QGroupBox()
 		toolGroup.setObjectName('ViewCloudDiskToolGroup')
 		toolLayout=QtGui.QHBoxLayout()
@@ -134,7 +149,8 @@ class AllFiles(QtGui.QFrame):
 		mainLayout.addLayout(topLayout)
 		#mainLayout.addLayout(toolLayout)
 		mainLayout.addWidget(toolGroup)
-		mainLayout.addStretch()
+		mainLayout.addWidget(self.listWidget)
+		#mainLayout.addStretch()
 		mainLayout.setContentsMargins(0,0,0,0)
 		mainLayout.setSpacing(4)
 		self.setLayout(mainLayout)
@@ -146,3 +162,10 @@ class AllFiles(QtGui.QFrame):
 	def setToolButtonIcon(self,toolButton,strIcon):
 		toolButton.setIcon(QtGui.QIcon(strIcon))
 		toolButton.setIconSize(QtCore.QSize(26,26))
+
+	def iconForSymbol(self,name):
+		fileName=QtCore.QString("./symbolimage/"+name)
+		fileName.toLower()
+		fileName.replace(" ","-")
+		return QtGui.QIcon(fileName)
+

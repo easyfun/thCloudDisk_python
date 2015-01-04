@@ -5,6 +5,7 @@ import sys
 from PyQt4 import QtGui
 from PyQt4 import QtCore
 from pvclouddisk import allfiles
+from pvclouddisk import safebox
 
 class thViewCloudDisk(QtGui.QFrame):
 	def __init__(self,application,parent=None,windowFlag=QtCore.Qt.Widget):
@@ -45,8 +46,23 @@ class thViewCloudDisk(QtGui.QFrame):
 		self.pvAllFiles=allfiles.AllFiles(self.application)
 		self.statckedWidget.addWidget(self.pvAllFiles)
 
+		self.pvSafeBox=safebox.SafeBox(self.application)
+		self.statckedWidget.addWidget(self.pvSafeBox)
+
+
 	def initViewConnect(self):
-		self.listWidget.currentRowChanged.connect(self.statckedWidget.setCurrentIndex)
+		#self.listWidget.currentRowChanged.connect(self.statckedWidget.setCurrentIndex)
+		self.listWidget.currentRowChanged.connect(self.setViewShow)
+
+	def setViewShow(self,index):
+		realIndex=index
+		if 7==index:
+			realIndex=1
+		else:
+			realIndex=0
+
+		self.statckedWidget.setCurrentIndex(realIndex)
+
 
 def main():
 	app=QtGui.QApplication(sys.argv)
