@@ -44,7 +44,7 @@ class SafeBox(QtGui.QFrame):
 
 		self.labelModifyPassword=QtGui.QLabel('<u>Modify safebox password</u>')
 		self.labelModifyPassword.setStyleSheet('''QLabel{
-			font-size:16px;
+			font-ssze:16px;
 			}''')
 
 		gridLayout=QtGui.QGridLayout()

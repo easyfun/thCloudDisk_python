@@ -2,6 +2,7 @@
 #-*-coding:utf-8-*-
 
 import sys
+import os
 from PyQt4 import QtGui
 from PyQt4 import QtCore
 from thFrame import thframe
@@ -69,8 +70,16 @@ class ThSkinDialog(thframe.ThFrame):
 		self.themeDict={}
 		self.themeObjList=[]
 		self.themeNameList=[]
-		self.hoverIcon=QtGui.QIcon('./skin/icons/appbar.camera.flash.off.selected.png')
-		self.selectedIcon=QtGui.QIcon('./skin/icons/appbar.camera.flash.auto.selected.png')
+
+		icon_dirname=os.path.dirname(thlib.get_pyfile_dirname(__file__))
+		icon_dirname=os.path.dirname(icon_dirname)
+		self.hoverIcon=QtGui.QIcon(
+			os.path.join(icon_dirname,'skin','icons','appbar.camera.flash.off.selected.png'))
+			 # ('./skin/icons/appbar.camera.flash.off.selected.png')
+
+		self.selectedIcon=QtGui.QIcon(
+			os.path.join(icon_dirname,'skin','icons','appbar.camera.flash.auto.selected.png'))
+		 # ('./skin/icons/appbar.camera.flash.auto.selected.png')
 
 	def initSkinUI(self):
 	#	hideControl=('logoButton','skinButton','menuButton','minButton','maxButton')
@@ -128,7 +137,12 @@ class ThSkinDialog(thframe.ThFrame):
 						obj.selectedButton.show()
 
 					#改变皮肤
-					getQss,qss=thlib.getQssFile('./skin/qss/%s.qss' % obj.color)
+					qss_file_dirname=thlib.get_pyfile_dirname(__file__)
+					qss_file_dirname=os.path.dirname(qss_file_dirname)
+					qss_file_dirname=os.path.join(qss_file_dirname,'skin','qss')
+
+					getQss,qss=thlib.getQssFile(
+						os.path.join(qss_file_dirname,'./skin/qss/%s.qss' % obj.color))
 					if getQss:
 						self.application.setStyleSheet(qss)
 

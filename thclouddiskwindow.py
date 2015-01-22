@@ -129,15 +129,18 @@ class ThCloudDiskWindow(thframe.ThFrame):
 
 
 def main():
+	import os
 	app=QtGui.QApplication(sys.argv)
 	print(sys.argv)
-	getQss,qss=thlibs.getQssFile('./skin/qss/black.qss')
+
+	qss_file_path=os.path.join(thlib.get_pyfile_dirname(__file__),'skin','qss','teal.qss')
+	getQss,qss=thlib.getQssFile(qss_file_path) # './skin/qss/black.qss'
 
 	if getQss:
 		app.setStyleSheet(qss)
 		pass
 
-	w=ThCloudDiskWindow()
+	w=ThCloudDiskWindow(app)
 	w.setGeometry(100,100,800,600)
 	w.show()
 	sys.exit(app.exec_())
