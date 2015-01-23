@@ -71,6 +71,7 @@ class ThToolBar(QtGui.QFrame):
 		mainLayout.addStretch()
 #		mainLayout.addWidget(self.buttonDict['LogoPicture'])
 		mainLayout.setSpacing(20)
+		mainLayout.setContentsMargins(20,0,0,12)
 		self.setLayout(mainLayout)
 
 

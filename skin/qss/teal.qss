@@ -78,12 +78,12 @@ QPushButton#CloudDisk{
  }
 
 QPushButton#CloudDisk:hover{
- 	border:1px solid black;
+ 	border:1px solid;
  	background-color:#3C8080;
  }
 
 QPushButton#CloudDisk:checked{
- 	border:1px solid black;
+ 	border:1px solid;
  	background-color:#3C8080;
 }
 /*
