@@ -27,21 +27,14 @@ class ThToolBar(QtGui.QFrame):
 		buttonText=('Head Pciture','Cloud Disk','Cloud Album','Shared Alum','AllFuction')
 		for i in range(len(buttonObjName)):
 			button=QtGui.QPushButton()
-			button.setFixedSize(80,80)
-			button.setText(buttonText[i])
+			button.setFixedSize(70,80)
+			if 0 != i:
+				button.setText(buttonText[i])
 			button.setObjectName(buttonObjName[i])
 			button.setFlat(True)
 			button.setCheckable(True)
+			button.setFocusPolicy(QtCore.Qt.NoFocus)
 			self.buttonDict[buttonObjName[i]]=button
-
-#		self.buttonDict['HeadPicture'].setStyleSheet('''QPushButton{
-#					background-image:url(../skin/icons/appbar.group.png);
-#					background-repeat:no-repeat;
-#					background-position:center top;
-#					background-color:transparent;
-#					text-align:center bottom;
-#					padding-bottom:5px;
-#					border-bottom: 2px solid black;}''')
 
 		self.buttonDict['HeadPicture'].setFocusPolicy(QtCore.Qt.NoFocus)
 		self.buttonDict['HeadPicture'].setCursor(QtCore.Qt.PointingHandCursor)
@@ -109,18 +102,3 @@ def getQssFile(qssFile):
 		f.close()
 
 	return result,qss
-
-def main():
-	app=QtGui.QApplication(sys.argv)
-
-	getQss,qss=getQssFile('../skin/qss/teal.qss')
-	if getQss:
-		app.setStyleSheet(qss)
-
-	w=ThToolBar(app)
-	w.setGeometry(100,100,300,94)
-	w.show()
-	sys.exit(app.exec_())
-
-if __name__=='__main__':
-	main()
