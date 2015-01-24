@@ -4,6 +4,7 @@
 import sys
 from PyQt4 import QtGui
 from PyQt4 import QtCore
+from thResource import *
 
 class ThToolBar(QtGui.QFrame):
 	def __init__(self,application,parent=None,windowFlags=QtCore.Qt.Widget):
@@ -21,10 +22,9 @@ class ThToolBar(QtGui.QFrame):
 	def initToolBarUI(self):
 		self.setFixedHeight(92)
 
-#		buttonObjName=('HeadPicture','CloudDisk','CloudAlbum','SharedAlum','LogoPicture')
-#		buttonText=('Head Pciture','Cloud Disk','Cloud Album','Shared Alum','Logo Picture')
 		buttonObjName=('HeadPicture','CloudDisk','CloudAlbum','SharedAlum','AllFuction')
-		buttonText=('Head Pciture','Cloud Disk','Cloud Album','Shared Alum','AllFuction')
+		#buttonText=('Head Pciture','Cloud Disk','Cloud Album','Shared Alum','AllFuction')
+		buttonText=(u'Head Pciture',u'网盘',u'云相册',u'共享相册',u'功能大全')
 		for i in range(len(buttonObjName)):
 			button=QtGui.QPushButton()
 			button.setFixedSize(70,80)

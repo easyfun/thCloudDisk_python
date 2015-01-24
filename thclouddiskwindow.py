@@ -16,6 +16,7 @@ from thPageView.thviewallfunction import thViewAllFunction
 class ThCloudDiskWindow(thframe.ThFrame):
 	def __init__(self,application,parent=None,windowFlags=QtCore.Qt.Widget):
 		super(ThCloudDiskWindow,self).__init__(parent,windowFlags)
+		self.setObjectName('ThCloudDiskWindow')
 		self.application=application
 		self.initCloudDiskData()
 		self.initCloudDiskUI()

@@ -30,7 +30,10 @@ class thViewCloudDisk(QtGui.QFrame):
 		mainLayout.setSpacing(0)
 		self.setLayout(mainLayout)
 
-		strItems=('All Files','Files','Music','Vedio','Photograph','From Browser','My Shared','Safe Box','Recycle Bin','History')
+		#strItems=('All Files','Files','Music','Vedio','Photograph','From Browser','My Shared','Safe Box','Recycle Bin','History')
+		strItems=(u'全部文件',u'文档',u'音乐',u'视频',u'照片',
+			u'我的分享',u'保险箱',u'回收站',u'操作历史')
+
 		icons=('appbar.page.new.png','appbar.page.pdf.png','appbar.page.powerpoint.png',
 			'appbar.page.search.png','appbar.page.text.png','appbar.page.word.png',
 			'appbar.page.xml.png','appbar.paper.png','appbar.paw.png','appbar.paypal.png')
