@@ -6,7 +6,7 @@ import os
 from PyQt4 import QtGui
 from PyQt4 import QtCore
 
-class DiskListWidget(QtGui.QWidget):
+class DiskListWidget(QtGui.QFrame):
 	def __init__(self):
 		super(DiskListWidget,self).__init__()
 		self.init_data()
