@@ -1,6 +1,8 @@
-<!DOCTYPE RCC><RCC version="1.0">
+<!DOCTYPE RCC>
+<RCC version="1.0">
 <qresource>
-    <file>icon_images/toolbar.head.png</file>
-    <file>icon_images/toolbar.skydrive.png</file>
+    <file>icon_images/toolbar.head_64.png</file>
+    <file>icon_images/toolbar.skydrive_48.png</file>
+    <file alias="all_files_16.png">icon_images/listwidget.all_files_16.png</file>
 </qresource>
 </RCC>

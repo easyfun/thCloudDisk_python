@@ -9,8 +9,8 @@ from thFrame import thframe
 from thLib import thlib
 from thclouddiskwindow import ThCloudDiskWindow
 
-
 if __name__=='__main__':
+	
 	app=QtGui.QApplication(sys.argv)
 
 	qss_file_path=os.path.join(thlib.get_pyfile_dirname(__file__),'skin','qss','teal.qss')
@@ -24,3 +24,4 @@ if __name__=='__main__':
 	w.setGeometry(100,100,800,600)
 	w.show()
 	sys.exit(app.exec_())
+	
