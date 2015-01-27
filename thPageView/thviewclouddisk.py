@@ -33,18 +33,19 @@ class thViewCloudDisk(QtGui.QFrame):
 		#mainLayout.addWidget(self.listWidget)
 		mainLayout.addWidget(self.diskList)
 		mainLayout.addWidget(self.statckedWidget)
-		mainLayout.setContentsMargins(0,0,0,0)
+		mainLayout.setContentsMargins(1,1,1,1)
 		mainLayout.setSpacing(0)
 		self.setLayout(mainLayout)
 
-		#self.pvAllFiles=allfiles.AllFiles(self.application)
-		#self.statckedWidget.addWidget(self.pvAllFiles)
-		#self.pvSafeBox=safebox.SafeBox(self.application)
-		#self.statckedWidget.addWidget(self.pvSafeBox)
+		self.pvAllFiles=allfiles.AllFiles(self.application)
+		self.statckedWidget.addWidget(self.pvAllFiles)
+		self.pvSafeBox=safebox.SafeBox(self.application)
+		self.statckedWidget.addWidget(self.pvSafeBox)
 
 	def initViewConnect(self):
 		#self.listWidget.currentRowChanged.connect(self.statckedWidget.setCurrentIndex)
 		#self.listWidget.currentRowChanged.connect(self.setViewShow)
+		self.diskList.current_row_changed.connect(self.setViewShow)
 		pass
 
 	def setViewShow(self,index):

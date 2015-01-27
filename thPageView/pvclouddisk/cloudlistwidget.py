@@ -13,13 +13,16 @@ class DiskListWidget(QtGui.QFrame):
 		self.init_ui()
 		self.init_connect()
 
+		current_row_changed=QtCore.pyqtSignal()
+	
 	def init_data(self):
 		pass
 
 	def init_ui(self):
 		self.setStyleSheet('''
-			QWidget{
+			QFrame{
 				background:white;
+				border-right:1px solid #8f8f91;
 			}
 			QPushButton#DiskListWidget_PushButton{
 				border:none;
@@ -65,20 +68,21 @@ class DiskListWidget(QtGui.QFrame):
 				border:none;
 			}
 
+
 			QGroupBox#DiskListWidget_GroupBox_All_Files{
 				border:none;
 			}
 			QGroupBox#DiskListWidget_GroupBox_My_Shared{
 				border:none;
-				border-top:1px solid black;
+				border-top:1px solid #8f8f91;
 			}
 			QGroupBox#DiskListWidget_GroupBox_Can{
 				border:none;
-				border-top:1px solid black;
+				border-top:1px solid #8f8f91;
 			}
 			QGroupBox#DiskListWidget_GroupBox_History{
 				border:none;
-				border-top:1px solid black;
+				border-top:1px solid #8f8f91;
 			}
 			''')
 
@@ -139,6 +143,7 @@ class DiskListWidget(QtGui.QFrame):
 								self.dict_groupbox['groupbox_history'][group_box_object_index]],
 			}
 
+		index=0
 		for value in self.dict_button.values():
 			button=QtGui.QPushButton(value[1])
 			button.setIcon(QtGui.QIcon(value[2]))
@@ -149,6 +154,8 @@ class DiskListWidget(QtGui.QFrame):
 			button.setFocusPolicy(QtCore.Qt.NoFocus)
 			button.setObjectName(value[3])
 			value.append(button)
+			value.append(index)
+			index+=1
 
 		#print self.dict_groupbox
 		#print self.dict_button
@@ -162,10 +169,8 @@ class DiskListWidget(QtGui.QFrame):
 						layout_group.addWidget(v[5])
 						index+=1
 						break
-			if 0==value[1]:
-				layout_group.setContentsMargins(0,2,0,2)
-			else:
-				layout_group.setContentsMargins(0,2,0,2)
+
+			layout_group.setContentsMargins(0,2,0,2)
 			layout_group.setSpacing(1)
 			value[3].setLayout(layout_group)
 
@@ -186,14 +191,16 @@ class DiskListWidget(QtGui.QFrame):
 
 	def init_connect(self):
 		for value in self.dict_button.values():
-			value[5].clicked.connect(self.buttonCheckedSlot)
+			value[5].clicked.connect(self.button_checked_slot)
 
 
-	def buttonCheckedSlot(self):
+	def button_checked_slot(self):
 		self.sender().setChecked(True)
 		for value in self.dict_button.values():
 			if value[5] is not self.sender():
 				value[5].setChecked(False)
+			else:
+				current_row_changed.emit()
 
 	'''
 	def setButtonChecked(self,buttonName):
