@@ -24,179 +24,180 @@ class DiskListWidget(QtGui.QFrame):
 			QPushButton#DiskListWidget_PushButton{
 				border:none;
 				text-align:left;
-				padding-left: 30px;
+				padding-left: 16px;
 				color: black;
 			}
 			QPushButton#DiskListWidget_PushButton:hover{
 				border:none;
 				background-color:teal;
+				color:white;
 			}
 			QPushButton#DiskListWidget_PushButton:checked{
 				border:none;
 				background-color:teal;
+				color:white;
 			}
 			QPushButton#DiskListWidget_PushButton:flat{
 				border:none;
 			}
-
-
-			QGroupBox#DiskListWidget_All_Files{
-				border:none;
-			}
-			QGroupBox#DiskListWidget_My_Shared{
-				border:none;
-				border-top:1px solid black;
-			}
-			QGroupBox#DiskListWidget_Can{
-				border:none;
-				border-top:1px solid black;
-			}
-			QGroupBox#DiskListWidget_History{
-				border:none;
-				border-top:1px solid black;
-			}
-
 			QPushButton#DiskListWidget_PushButton:hover{
 				background:teal;
 			}
+
+
+			QPushButton#DiskListWidget_PushButton_2nd{
+				border:none;
+				text-align:left;
+				padding-left: 24px;
+				color: black;
+			}
+			QPushButton#DiskListWidget_PushButton_2nd:hover{
+				border:none;
+				background-color:teal;
+				color:white;
+			}
+			QPushButton#DiskListWidget_PushButton_2nd:checked{
+				border:none;
+				background-color:teal;
+				color:white;
+			}
+			QPushButton#DiskListWidget_PushButton_2nd:flat{
+				border:none;
+			}
+
+			QGroupBox#DiskListWidget_GroupBox_All_Files{
+				border:none;
+			}
+			QGroupBox#DiskListWidget_GroupBox_My_Shared{
+				border:none;
+				border-top:1px solid black;
+			}
+			QGroupBox#DiskListWidget_GroupBox_Can{
+				border:none;
+				border-top:1px solid black;
+			}
+			QGroupBox#DiskListWidget_GroupBox_History{
+				border:none;
+				border-top:1px solid black;
+			}
 			''')
 
-		group_all_files=QtGui.QGroupBox()
-		group_all_files.setObjectName('DiskListWidget_All_Files')
-		group_my_shared=QtGui.QGroupBox()
-		group_my_shared.setObjectName('DiskListWidget_My_Shared')
-		group_can=QtGui.QGroupBox()
-		group_can.setObjectName('DiskListWidget_Can')
-		group_history=QtGui.QGroupBox()
-		group_history.setObjectName('DiskListWidget_History')
+		'''
+		dict_groupbox={'group_box_all_files':[0-index,
+											1-button_num,
+											2-object_name,
+											3-object]
+		'''
+		self.dict_groupbox={
+							'groupbox_all_files':[0,5,'DiskListWidget_GroupBox_All_Files'],
+							'groupbox_my_shared':[1,1,'DiskListWidget_GroupBox_My_Shared'],
+							'groupbox_can':[2,2,'DiskListWidget_GroupBox_Can'],
+							'groupbox_history':[3,1,'DiskListWidget_GroupBox_History']
+							}
+		for value in self.dict_groupbox.values():
+			groupbox=QtGui.QGroupBox()
+			groupbox.setObjectName(value[2])
+			value.append(groupbox)
 
-		self.button_all_files=QtGui.QPushButton(u'全部文档')
-		self.button_all_files.setIcon(QtGui.QIcon(':/all_files_16.png'))
-		self.button_all_files.setIconSize(QtCore.QSize(16,16))
-		self.button_all_files.setFixedHeight(32)
-		self.button_all_files.setFlat(True)
-		self.button_all_files.setCheckable(True)
-		self.button_all_files.setFocusPolicy(QtCore.Qt.NoFocus)
-		self.button_all_files.setObjectName('DiskListWidget_PushButton')
+		'''
+		dict_button={'button_all_files':[0-group_box_index,
+										1-text,
+										2-icon_path,
+										3-object_name,
+										4-group_box_object,
+										5-btn_object]}
+		'''
 
-		self.button_file=QtGui.QPushButton()
-		self.button_file.setObjectName('DiskListWidget_PushButton')
-		self.button_file.setIcon(QtGui.QIcon(':/all_files_16.png'))
-		self.button_file.setIconSize(QtCore.QSize(16,16))
-		self.button_file.setFixedHeight(32)
-		self.button_file.setFlat(True)
-		self.button_file.setCheckable(True)
-		self.button_file.setFocusPolicy(QtCore.Qt.NoFocus)
+		group_box_object_index=3
+		self.dict_button={
+			'button_all_files':[0,u'全部文档',':/all_files_16.png',
+								'DiskListWidget_PushButton',
+								self.dict_groupbox['groupbox_all_files'][group_box_object_index]],
+			'button_file':[1,u'文档',':/all_files_16.png',
+								'DiskListWidget_PushButton_2nd',
+								self.dict_groupbox['groupbox_all_files'][group_box_object_index]],
+			'button_music':[2,u'音乐',':/all_files_16.png',
+								'DiskListWidget_PushButton_2nd',
+								self.dict_groupbox['groupbox_all_files'][group_box_object_index]],
+			'button_vedio':[3,u'视频',':/all_files_16.png',
+								'DiskListWidget_PushButton_2nd',
+								self.dict_groupbox['groupbox_all_files'][group_box_object_index]],
+			'button_photo':[4,u'照片',':/all_files_16.png',
+								'DiskListWidget_PushButton_2nd',
+								self.dict_groupbox['groupbox_all_files'][group_box_object_index]],
+			'button_my_shared':[0,u'我的分享',':/all_files_16.png',
+								'DiskListWidget_PushButton',
+								self.dict_groupbox['groupbox_my_shared'][group_box_object_index]],
+			'button_safe_box':[0,u'保险箱',':/all_files_16.png',
+								'DiskListWidget_PushButton',
+								self.dict_groupbox['groupbox_can'][group_box_object_index]],
+			'button_recycle_bin':[1,u'回收站',':/all_files_16.png',
+								'DiskListWidget_PushButton',
+								self.dict_groupbox['groupbox_can'][group_box_object_index]],
+			'button_history':[0,u'操作历史',':/all_files_16.png',
+								'DiskListWidget_PushButton',
+								self.dict_groupbox['groupbox_history'][group_box_object_index]],
+			}
 
-		self.button_music=QtGui.QPushButton()
-		self.button_music.setObjectName('DiskListWidget_PushButton')
-		self.button_music.setIcon(QtGui.QIcon(':/all_files_16.png'))
-		self.button_music.setIconSize(QtCore.QSize(16,16))
-		self.button_music.setFixedHeight(32)
-		self.button_music.setFlat(True)
-		self.button_music.setCheckable(True)
-		self.button_music.setFocusPolicy(QtCore.Qt.NoFocus)
+		for value in self.dict_button.values():
+			button=QtGui.QPushButton(value[1])
+			button.setIcon(QtGui.QIcon(value[2]))
+			button.setIconSize(QtCore.QSize(16,16))
+			button.setFixedHeight(32)
+			button.setFlat(True)
+			button.setCheckable(True)
+			button.setFocusPolicy(QtCore.Qt.NoFocus)
+			button.setObjectName(value[3])
+			value.append(button)
 
-		self.button_vedio=QtGui.QPushButton()
-		self.button_vedio.setObjectName('DiskListWidget_PushButton')
-		self.button_vedio.setObjectName('DiskListWidget_PushButton')
-		self.button_vedio.setIcon(QtGui.QIcon(':/all_files_16.png'))
-		self.button_vedio.setIconSize(QtCore.QSize(16,16))
-		self.button_vedio.setFixedHeight(32)
-		self.button_vedio.setFlat(True)
-		self.button_vedio.setCheckable(True)
-		self.button_vedio.setFocusPolicy(QtCore.Qt.NoFocus)
+		#print self.dict_groupbox
+		#print self.dict_button
 
-		self.button_photo=QtGui.QPushButton()
-		self.button_photo.setObjectName('DiskListWidget_PushButton')
-		self.button_photo.setObjectName('DiskListWidget_PushButton')
-		self.button_photo.setIcon(QtGui.QIcon(':/all_files_16.png'))
-		self.button_photo.setIconSize(QtCore.QSize(16,16))
-		self.button_photo.setFixedHeight(32)
-		self.button_photo.setFlat(True)
-		self.button_photo.setCheckable(True)
-		self.button_photo.setFocusPolicy(QtCore.Qt.NoFocus)
-		
-		layout_all_files=QtGui.QVBoxLayout()
-		layout_all_files.addWidget(self.button_all_files)
-		layout_all_files.addWidget(self.button_file)
-		layout_all_files.addWidget(self.button_music)
-		layout_all_files.addWidget(self.button_vedio)
-		layout_all_files.addWidget(self.button_photo)
-		layout_all_files.setContentsMargins(0,2,0,0)
-		layout_all_files.setSpacing(1)
-		group_all_files.setLayout(layout_all_files)
-
-		self.button_my_shared=QtGui.QPushButton()
-		self.button_my_shared.setObjectName('DiskListWidget_PushButton')
-		self.button_my_shared.setObjectName('DiskListWidget_PushButton')
-		self.button_my_shared.setIcon(QtGui.QIcon(':/all_files_16.png'))
-		self.button_my_shared.setIconSize(QtCore.QSize(16,16))
-		self.button_my_shared.setFixedHeight(32)
-		self.button_my_shared.setFlat(True)
-		self.button_my_shared.setCheckable(True)
-		self.button_my_shared.setFocusPolicy(QtCore.Qt.NoFocus)
-
-		layout_my_shared=QtGui.QVBoxLayout()
-		layout_my_shared.addWidget(self.button_my_shared)
-		layout_my_shared.setContentsMargins(0,4,0,4)
-		layout_my_shared.setSpacing(1)
-		group_my_shared.setLayout(layout_my_shared)
-
-		self.button_safe_box=QtGui.QPushButton()
-		self.button_safe_box.setObjectName('DiskListWidget_PushButton')
-		self.button_safe_box.setObjectName('DiskListWidget_PushButton')
-		self.button_safe_box.setIcon(QtGui.QIcon(':/all_files_16.png'))
-		self.button_safe_box.setIconSize(QtCore.QSize(16,16))
-		self.button_safe_box.setFixedHeight(32)
-		self.button_safe_box.setFlat(True)
-		self.button_safe_box.setCheckable(True)
-		self.button_safe_box.setFocusPolicy(QtCore.Qt.NoFocus)
-
-		self.button_recycle_bin=QtGui.QPushButton()
-		self.button_recycle_bin.setObjectName('DiskListWidget_PushButton')
-		self.button_recycle_bin.setObjectName('DiskListWidget_PushButton')
-		self.button_recycle_bin.setIcon(QtGui.QIcon(':/all_files_16.png'))
-		self.button_recycle_bin.setIconSize(QtCore.QSize(16,16))
-		self.button_recycle_bin.setFixedHeight(32)
-		self.button_recycle_bin.setFlat(True)
-		self.button_recycle_bin.setCheckable(True)
-		self.button_recycle_bin.setFocusPolicy(QtCore.Qt.NoFocus)
-
-		layout_can=QtGui.QVBoxLayout()
-		layout_can.addWidget(self.button_safe_box)
-		layout_can.addWidget(self.button_recycle_bin)
-		layout_can.setContentsMargins(0,4,0,4)
-		layout_can.setSpacing(1)
-		group_can.setLayout(layout_can)
-
-		self.button_history=QtGui.QPushButton()
-		self.button_history.setObjectName('DiskListWidget_PushButton')
-		self.button_history.setObjectName('DiskListWidget_PushButton')
-		self.button_history.setIcon(QtGui.QIcon(':/all_files_16.png'))
-		self.button_history.setIconSize(QtCore.QSize(16,16))
-		self.button_history.setFixedHeight(32)
-		self.button_history.setFlat(True)
-		self.button_history.setCheckable(True)
-		self.button_history.setFocusPolicy(QtCore.Qt.NoFocus)
-
-		layout_history=QtGui.QVBoxLayout()
-		layout_history.addWidget(self.button_history)
-		layout_history.setContentsMargins(0,4,0,0)
-		layout_history.setSpacing(1)
-		group_history.setLayout(layout_history)
+		for value in self.dict_groupbox.values():
+			layout_group=QtGui.QVBoxLayout()
+			index=0
+			for count in range(0,value[1]):
+				for v in self.dict_button.values():
+					if index==v[0] and value[group_box_object_index]==v[4]:
+						layout_group.addWidget(v[5])
+						index+=1
+						break
+			if 0==value[1]:
+				layout_group.setContentsMargins(0,2,0,2)
+			else:
+				layout_group.setContentsMargins(0,2,0,2)
+			layout_group.setSpacing(1)
+			value[3].setLayout(layout_group)
 
 		layout_main=QtGui.QVBoxLayout()
-		layout_main.addWidget(group_all_files)
-		layout_main.addWidget(group_my_shared)
-		layout_main.addWidget(group_can)
-		layout_main.addWidget(group_history)
+		for i in range(0,len(self.dict_groupbox)+1):
+			for value in self.dict_groupbox.values():
+				if i==value[0]:
+					layout_main.addWidget(value[group_box_object_index])
+					break
+
 		layout_main.addStretch()
 		layout_main.setContentsMargins(0,0,0,0)
 		layout_main.setSpacing(1)
 		self.setLayout(layout_main)
+
 		self.setFixedWidth(160)
 
 
 	def init_connect(self):
-		pass
+		for value in self.dict_button.values():
+			value[5].clicked.connect(self.buttonCheckedSlot)
+
+
+	def buttonCheckedSlot(self):
+		self.sender().setChecked(True)
+		for value in self.dict_button.values():
+			if value[5] is not self.sender():
+				value[5].setChecked(False)
+
+	'''
+	def setButtonChecked(self,buttonName):
+		for value in self.dict_button.values():
+			if value[5] is not self.sender():
+				button.setChecked(False)
+	'''
