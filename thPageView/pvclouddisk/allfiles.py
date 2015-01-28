@@ -18,41 +18,62 @@ class AllFiles(QtGui.QFrame):
 		pass
 
 	def initAllFilesUI(self):
+
+		self.setStyleSheet('''
+			QFrame{
+				color:black;
+			}
+			QToolButton{
+				color:black;
+			}
+			''')
+
+		'''
+		{'button_id':[0-button_name,1-object_name,2-button_type,3-icon_path,4-object]}
+		3-button_type:0-icon,1-icon_text,2-menu
+		'''
+		self.dict_button={'home_button':[u'','ViewCloudDiskToolButton',0,':/allfiles.home_24.png'],
+			'back_button':[u'','ViewCloudDiskToolButton',0,':/allfiles.back_24.png'],
+			'forword_button':[u'','ViewCloudDiskToolButton',0,':/allfiles.forword_24.png'],
+			'refresh_button':[u'','ViewCloudDiskToolButton',0,':/allfiles.refresh_24.png'],
+			'upload_button':[u'上传文件','ViewCloudDiskToolButton',1,':/allfiles.upload_24.png'],
+			'new_button':[u'新建','ViewCloudDiskToolButton',1,':/allfiles.new_24.png'],
+			'download_button':[u'下载','ViewCloudDiskToolButton',1,':/allfiles.download_24.png'],
+			'delete_button':[u'删除','ViewCloudDiskToolButton',1,':/allfiles.delete_24.png'],
+			'share_button':[u'分享','ViewCloudDiskToolButton',1,':/allfiles.share_24.png'],
+			'sort_button':[u'排序','ViewCloudDiskToolButton',1,':/allfiles.sort_24.png'],
+			'view_button':[u'视图','ViewCloudDiskToolButton',1,':/allfiles.view_24.png']
+			}
+
 		height=26
-		self.homeButton=QtGui.QToolButton()
-		self.homeButton.setObjectName('ViewCloudDiskToolButton')
-		self.homeButton.setFixedHeight(height)
-		self.setToolButtonIcon(self.homeButton,'./thPageView/pvclouddisk/appbar.home.png')
+		for value in self.dict_button.values():
+			button=QtGui.QToolButton()
+			button.setObjectName(value[1])
+			button.setIcon(QtGui.QIcon(value[3]))
+			if 1==value[2]:
+				button.setText(value[0])
+				button.setToolButtonStyle(QtCore.Qt.ToolButtonTextBesideIcon)
+				button.setFixedHeight(height)
+			else:
+				button.setFixedSize(height,height)
 
-		self.backButton=QtGui.QToolButton()
-		self.backButton.setObjectName('ViewCloudDiskToolButton')
-		self.backButton.setFixedHeight(height)
-		self.setToolButtonIcon(self.backButton,'./thPageView/pvclouddisk/appbar.arrow.left.png')
-
-		self.forwordButton=QtGui.QToolButton()
-		self.forwordButton.setObjectName('ViewCloudDiskToolButton')
-		self.forwordButton.setFixedHeight(height)
-		self.setToolButtonIcon(self.forwordButton,'./thPageView/pvclouddisk/appbar.arrow.right.png')
+			value.append(button)
 
 		self.pathComboBox=QtGui.QComboBox()
 		self.pathComboBox.setFixedHeight(height)
-		self.refreshButton=QtGui.QToolButton()
-		self.refreshButton.setObjectName('ViewCloudDiskRefreshButton')
-		self.refreshButton.setFixedHeight(height)
-		self.setToolButtonIcon(self.refreshButton,'./thPageView/pvclouddisk/appbar.refresh.png')
 
 		self.searchEdit=QtGui.QLineEdit()
 		self.searchEdit.setFixedWidth(200)
 		self.searchEdit.setFixedHeight(height)
 
 		topLayout=QtGui.QHBoxLayout()
-		topLayout.addWidget(self.homeButton)
-		topLayout.addWidget(self.backButton)
-		topLayout.addWidget(self.forwordButton)
+		topLayout.addWidget(self.dict_button['home_button'][4])
+		topLayout.addWidget(self.dict_button['back_button'][4])
+		topLayout.addWidget(self.dict_button['forword_button'][4])
 
 		topChildLayout=QtGui.QHBoxLayout()
 		topChildLayout.addWidget(self.pathComboBox)
-		topChildLayout.addWidget(self.refreshButton)
+		topChildLayout.addWidget(self.dict_button['refresh_button'][4])
 	#	topLayout.addWidget(self.pathComboBox)
 	#	topLayout.setStretch(3,1)
 	#	topLayout.addWidget(self.refreshButton)
@@ -63,57 +84,6 @@ class AllFiles(QtGui.QFrame):
 
 		topLayout.addWidget(self.searchEdit)
 		topLayout.setContentsMargins(5,2,2,0)
-
-		height2=24
-		self.uploadButton=QtGui.QToolButton()
-		self.uploadButton.setFixedHeight(height2)
-		#self.uploadButton.setObjectName('ViewCloudDiskUploadButton')
-		self.uploadButton.setObjectName('ViewCloudDiskToolButton')
-		self.uploadButton.setToolButtonStyle(QtCore.Qt.ToolButtonTextBesideIcon)
-		self.uploadButton.setText('UpFile')
-		self.uploadButton.setIcon(QtGui.QIcon('./thPageView/pvclouddisk/appbar.upload.png'))
-
-		self.newButton=QtGui.QToolButton()
-		self.newButton.setFixedHeight(height2)
-		self.newButton.setObjectName('ViewCloudDiskToolButton')
-		self.newButton.setToolButtonStyle(QtCore.Qt.ToolButtonTextBesideIcon)
-		self.newButton.setText('New')
-		self.newButton.setIcon(QtGui.QIcon('./thPageView/pvclouddisk/appbar.add.png'))
-
-		self.downloadButton=QtGui.QToolButton()
-		self.downloadButton.setFixedHeight(height2)
-		self.downloadButton.setObjectName('ViewCloudDiskToolButton')
-		self.downloadButton.setToolButtonStyle(QtCore.Qt.ToolButtonTextBesideIcon)
-		self.downloadButton.setText('DownFile')
-		self.downloadButton.setIcon(QtGui.QIcon('./thPageView/pvclouddisk/appbar.download.png'))
-
-		self.deleteButton=QtGui.QToolButton()
-		self.deleteButton.setFixedHeight(height2)
-		self.deleteButton.setObjectName('ViewCloudDiskToolButton')
-		self.deleteButton.setToolButtonStyle(QtCore.Qt.ToolButtonTextBesideIcon)
-		self.deleteButton.setText('Delete')
-		self.deleteButton.setIcon(QtGui.QIcon('./thPageView/pvclouddisk/appbar.delete.png'))
-		
-		self.shareButton=QtGui.QToolButton()
-		self.shareButton.setFixedHeight(height2)
-		self.shareButton.setObjectName('ViewCloudDiskToolButton')
-		self.shareButton.setToolButtonStyle(QtCore.Qt.ToolButtonTextBesideIcon)
-		self.shareButton.setText('Share')
-		self.shareButton.setIcon(QtGui.QIcon('./thPageView/pvclouddisk/appbar.share.png'))
-		
-		self.sortButton=QtGui.QToolButton()
-		self.sortButton.setFixedHeight(height2)
-		self.sortButton.setObjectName('ViewCloudDiskToolButton')
-		self.sortButton.setToolButtonStyle(QtCore.Qt.ToolButtonTextBesideIcon)
-		self.sortButton.setText('Sort')
-		self.sortButton.setIcon(QtGui.QIcon('./thPageView/pvclouddisk/appbar.sort.png'))
-		
-		self.viewButton=QtGui.QToolButton()
-		self.viewButton.setFixedHeight(height2)
-		self.viewButton.setObjectName('ViewCloudDiskToolButton')
-		self.viewButton.setToolButtonStyle(QtCore.Qt.ToolButtonTextBesideIcon)
-		self.viewButton.setText('View')
-		self.viewButton.setIcon(QtGui.QIcon('./thPageView/pvclouddisk/appbar.list.png'))
 
 		self.listWidget=QtGui.QListWidget()
 		self.listWidget.setObjectName('ViewCloudDiskListWidget')
@@ -134,14 +104,14 @@ class AllFiles(QtGui.QFrame):
 		toolGroup.setObjectName('ViewCloudDiskToolGroup')
 		toolLayout=QtGui.QHBoxLayout()
 		toolLayout.setObjectName('ToolLayout')
-		toolLayout.addWidget(self.uploadButton)
-		toolLayout.addWidget(self.newButton)
-		toolLayout.addWidget(self.downloadButton)
-		toolLayout.addWidget(self.deleteButton)
-		toolLayout.addWidget(self.shareButton)
+		toolLayout.addWidget(self.dict_button['upload_button'][4])
+		toolLayout.addWidget(self.dict_button['new_button'][4])
+		toolLayout.addWidget(self.dict_button['download_button'][4])
+		toolLayout.addWidget(self.dict_button['delete_button'][4])
+		toolLayout.addWidget(self.dict_button['share_button'][4])
 		toolLayout.addStretch()
-		toolLayout.addWidget(self.sortButton)
-		toolLayout.addWidget(self.viewButton)
+		toolLayout.addWidget(self.dict_button['sort_button'][4])
+		toolLayout.addWidget(self.dict_button['view_button'][4])
 		toolLayout.setContentsMargins(5,2,2,2)
 		toolGroup.setLayout(toolLayout)
 

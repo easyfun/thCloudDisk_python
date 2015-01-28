@@ -14,6 +14,18 @@
     <file alias="safe_box_24.png">icon_images/listwidget.safe_box_24.png</file>
     <file alias="recycle_bin_24.png">icon_images/listwidget.recycle_bin_24.png</file>
     <file alias="history_24.png">icon_images/listwidget.history_24.png</file>
+    <file alias="allfiles.back_24.png">icon_images/allfiles.back_24.png</file>
+    <file alias="allfiles.home_24.png">icon_images/allfiles.home_24.png</file>
+    <file alias="allfiles.forword_24.png">icon_images/allfiles.forword_24.png</file>
+
+    <file alias="allfiles.view_24.png">icon_images/allfiles.view_24.png</file>
+    <file alias="allfiles.delete_24.png">icon_images/allfiles.delete_24.png</file>
+    <file alias="allfiles.download_24.png">icon_images/allfiles.download_24.png</file>
+    <file alias="allfiles.new_24.png">icon_images/allfiles.new_24.png</file>
+    <file alias="allfiles.refresh_24.png">icon_images/allfiles.refresh_24.png</file>
+    <file alias="allfiles.share_24.png">icon_images/allfiles.share_24.png</file>
+    <file alias="allfiles.sort_24.png">icon_images/allfiles.sort_24.png</file>
+    <file alias="allfiles.upload_24.png">icon_images/allfiles.upload_24.png</file>
 
 </qresource>
 </RCC>
