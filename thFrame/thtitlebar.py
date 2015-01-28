@@ -6,19 +6,19 @@ from PyQt4 import QtGui
 from PyQt4 import QtCore
 
 class ThTitleBar(QtGui.QFrame):
-	def __init__(self,parent=None,windowFlags=QtCore.Qt.Widget):
-		super(ThTitleBar,self).__init__(parent,windowFlags)
-		self.initData()
-		self.initUI()
-		self.initConnect()
-		self.setFocusPolicy(QtCore.Qt.NoFocus)
-
 	closeButtonClicked=QtCore.pyqtSignal()
 	minButtonClicked=QtCore.pyqtSignal()
 	maximumShow=QtCore.pyqtSignal()
 	normalShow=QtCore.pyqtSignal()
 	menuButtonClicked=QtCore.pyqtSignal()
 	skinButtonClicked=QtCore.pyqtSignal()
+
+	def __init__(self,parent=None,windowFlags=QtCore.Qt.Widget):
+		super(ThTitleBar,self).__init__(parent,windowFlags)
+		self.initData()
+		self.initUI()
+		self.initConnect()
+		self.setFocusPolicy(QtCore.Qt.NoFocus)
 
 	def initData(self):
 		self.setObjectName('ThTitleBar')

@@ -50,7 +50,7 @@ class thViewCloudDisk(QtGui.QFrame):
 
 	def setViewShow(self,index):
 		realIndex=index
-		if 7==index:
+		if 6==index:
 			realIndex=1
 		else:
 			realIndex=0

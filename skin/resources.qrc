@@ -4,5 +4,16 @@
     <file>icon_images/toolbar.head_64.png</file>
     <file>icon_images/toolbar.skydrive_48.png</file>
     <file alias="all_files_16.png">icon_images/listwidget.all_files_16.png</file>
+    <file alias="file_16.png">icon_images/listwidget.file_16.png</file>
+    <file alias="all_files_24.png">icon_images/listwidget.all_files_24.png</file>
+    <file alias="file_24.png">icon_images/listwidget.file_24.png</file>
+    <file alias="music_24.png">icon_images/listwidget.music_24.png</file>
+    <file alias="photo_24.png">icon_images/listwidget.photo_24.png</file>
+    <file alias="video_24.png">icon_images/listwidget.video_24.png</file>
+    <file alias="share_24.png">icon_images/listwidget.share_24.png</file>
+    <file alias="safe_box_24.png">icon_images/listwidget.safe_box_24.png</file>
+    <file alias="recycle_bin_24.png">icon_images/listwidget.recycle_bin_24.png</file>
+    <file alias="history_24.png">icon_images/listwidget.history_24.png</file>
+
 </qresource>
 </RCC>
