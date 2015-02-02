@@ -293,7 +293,7 @@ QListWidget#ViewCloudDiskListWidget{
 	show-decoration-selected:1;
 	background-color:white;
 	border-style:none;
-	padding:6px 6px 6px 6px;
+	padding:3px;
 }
 
 QListWidget#ViewCloudDiskListWidget::item:alternate{
@@ -301,7 +301,10 @@ QListWidget#ViewCloudDiskListWidget::item:alternate{
 }
 
 QListWidget#ViewCloudDiskListWidget::item:selected{
-	border:1px solid #6a6ea9;
+	border:1px solid teal;
+	border-radius:4px;
+    background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,
+                                 stop: 0 #ABAFE5, stop: 1 #8588B2);
 }
 
 /*
@@ -311,12 +314,21 @@ QListWidget#ViewCloudDiskListWidget::selected:!active{
 }
 */
 
+QListWidget#ViewCloudDiskListWidget::selected:!active{
+    background: transparent;
+    color:black;
+}
+
 /*
 QListWidget#ViewCloudDiskListWidget::item:selected:active {
-    background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,
-                                stop: 0 #6a6ea9, stop: 1 #888dd9);
+    background: transparent;
 }
 */
+
+QListWidget#ViewCloudDiskListWidget::item::selected:active{
+    background: transparent;
+    color:black;
+}
 
 /*
 QListWidget#ViewCloudDiskListWidget::item:hover {
@@ -328,4 +340,5 @@ QListWidget#ViewCloudDiskListWidget::item:hover {
 	border:1px solid teal;
 	border-radius:4px;
 	background: transparent;
+	color:black;
 }

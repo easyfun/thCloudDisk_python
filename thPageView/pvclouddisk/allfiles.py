@@ -89,6 +89,7 @@ class AllFiles(QtGui.QFrame):
 		self.listWidget.setEditTriggers(QtGui.QAbstractItemView.SelectedClicked)
 		self.listWidget.setViewMode(QtGui.QListView.IconMode)
 		self.listWidget.setResizeMode(QtGui.QListView.Adjust)
+		self.listWidget.setSpacing(5)
 
 
 		'''
@@ -114,7 +115,7 @@ class AllFiles(QtGui.QFrame):
 				item.setIcon(QtGui.QIcon(':/listwidget.upload_48.png'))
 				item.setFlags(QtCore.Qt.ItemIsEnabled)
 
-			item.setSizeHint(QtCore.QSize(72,64))
+			item.setSizeHint(QtCore.QSize(80,72))
 			item.setTextAlignment(QtCore.Qt.AlignCenter)
 
 		toolGroup=QtGui.QGroupBox()
