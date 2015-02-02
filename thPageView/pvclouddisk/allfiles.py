@@ -74,9 +74,6 @@ class AllFiles(QtGui.QFrame):
 		topChildLayout=QtGui.QHBoxLayout()
 		topChildLayout.addWidget(self.pathComboBox)
 		topChildLayout.addWidget(self.dict_button['refresh_button'][4])
-	#	topLayout.addWidget(self.pathComboBox)
-	#	topLayout.setStretch(3,1)
-	#	topLayout.addWidget(self.refreshButton)
 		topChildLayout.setContentsMargins(0,0,0,0)
 		topChildLayout.setSpacing(1)
 		topLayout.addLayout(topChildLayout)
@@ -87,18 +84,38 @@ class AllFiles(QtGui.QFrame):
 
 		self.listWidget=QtGui.QListWidget()
 		self.listWidget.setObjectName('ViewCloudDiskListWidget')
-		self.listWidget.setIconSize(QtCore.QSize(50,50))
+		self.listWidget.setIconSize(QtCore.QSize(48,48))
 		self.listWidget.setFocusPolicy(QtCore.Qt.NoFocus)
 		self.listWidget.setEditTriggers(QtGui.QAbstractItemView.SelectedClicked)
 		self.listWidget.setViewMode(QtGui.QListView.IconMode)
 		self.listWidget.setResizeMode(QtGui.QListView.Adjust)
 
-		itemName='Upload'
+
+		'''
+		itemName=u'上传文件'
 		item=QtGui.QListWidgetItem(itemName,self.listWidget)
-		item.setIcon(QtGui.QIcon('./thPageView/pvclouddisk/appbar.add.png'))
+		item.setIcon(QtGui.QIcon(':/listwidget.upload_48.png'))
 		item.setFlags(QtCore.Qt.ItemIsEnabled)
-		item.setSizeHint(QtCore.QSize(70,70))
+		item.setSizeHint(QtCore.QSize(72,64))
 		item.setTextAlignment(QtCore.Qt.AlignCenter)
+		'''
+		#[type-0文件夹-1文件-2上传,name,full_path,parent_folder]
+		self.dict_listwidget_items=[[1,u'我的文件','',''],[0,u'我的文件夹','',''],[2,u'上传文件','','']]
+		for index in range(0,len(self.dict_listwidget_items)):
+			item=QtGui.QListWidgetItem(self.dict_listwidget_items[index][1],self.listWidget)
+			file_type=self.dict_listwidget_items[index][0]
+			if 0==file_type:
+				item.setIcon(QtGui.QIcon(':/listwidget.folder_48.png'))
+				item.setFlags(QtCore.Qt.ItemIsEnabled | QtCore.Qt.ItemIsEditable | QtCore.Qt.ItemIsSelectable)
+			elif 1==file_type:
+				item.setIcon(QtGui.QIcon(':/listwidget.document_48.png'))
+				item.setFlags(QtCore.Qt.ItemIsEnabled | QtCore.Qt.ItemIsEditable | QtCore.Qt.ItemIsSelectable)
+			else:
+				item.setIcon(QtGui.QIcon(':/listwidget.upload_48.png'))
+				item.setFlags(QtCore.Qt.ItemIsEnabled)
+
+			item.setSizeHint(QtCore.QSize(72,64))
+			item.setTextAlignment(QtCore.Qt.AlignCenter)
 
 		toolGroup=QtGui.QGroupBox()
 		toolGroup.setObjectName('ViewCloudDiskToolGroup')

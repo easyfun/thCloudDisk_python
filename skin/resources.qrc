@@ -27,5 +27,9 @@
     <file alias="allfiles.sort_24.png">icon_images/allfiles.sort_24.png</file>
     <file alias="allfiles.upload_24.png">icon_images/allfiles.upload_24.png</file>
 
+    <file alias="listwidget.upload_48.png">icon_images/listwidget.upload_48.png</file>
+    <file alias="listwidget.folder_48.png">icon_images/listwidget.folder_48.png</file>
+    <file alias="listwidget.document_48.png">icon_images/listwidget.document_48.png</file>
+
 </qresource>
 </RCC>
