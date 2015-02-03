@@ -28,6 +28,41 @@ class ThCloudDiskWindow(thframe.ThFrame):
 		self.pageIndexDict={}
 
 	def initCloudDiskUI(self):
+		#设置标题栏菜单
+		'''
+		0-类型:0-无子菜单,1-有子菜单
+		1-图标
+		2-text
+		3-快捷键
+		4-是否增加分组符
+		5-action_object
+		'''
+		actions=[[0,'',u'暂停传送','Ctrl+P',0],
+				[0,'',u'查看传输列表','Ctrl+V',0],
+				[0,'',u'本次传输完自动关机','Ctrl+T',1],
+				[0,'',u'更换帐号','Ctrl+A',1],
+				[0,'',u'隐藏悬浮框','Ctrl+X',0],
+				[0,'',u'设置','Ctrl+S',1],
+				[0,'',u'打开云盘网页版','Ctrl+W',0],
+				[1,'',u'帮助','Ctrl+H',0],
+				[0,'',u'在线升级','Ctrl+U',1],
+				[0,'',u'锁定云盘','Ctrl+L',1],
+				[0,'',u'退出','Ctrl+E',0]]
+		self.menu=QtGui.QMenu(self)
+		for index in range(len(actions)):
+			action=QtGui.QAction(QtGui.QIcon(actions[index][1]),actions[index][2],self)
+			action.setShortcut(actions[index][3])
+			actions[index].append(action)
+			self.menu.addAction(action)
+		#print self.titleBar
+		#print self.titleBar.getControl('menuButton')
+		#self.titleBar.getControl('menuButton').setMenu(self.menu)
+		
+		#self.titleBar.menuButton.setArrowType(QtCore.Qt.NoArrow)
+		#self.titleBar.menuButton.setPopupMode(QtGui.QToolButton.MenuButtonPopup)
+		self.titleBar.menuButton.setMenu(self.menu)
+		#self.titleBar.menuButton.clicked.connect(self.titleBar.menuButton.showMenu)
+
 		self.toolbar=thtoolbar.ThToolBar(self.application,self)
 		self.toolbar.setMouseTracking(True)
 
