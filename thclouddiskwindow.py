@@ -51,9 +51,11 @@ class ThCloudDiskWindow(thframe.ThFrame):
 		self.menu=QtGui.QMenu(self)
 		for index in range(len(actions)):
 			action=QtGui.QAction(QtGui.QIcon(actions[index][1]),actions[index][2],self)
-			action.setShortcut(actions[index][3])
+			#action.setShortcut(actions[index][3])
 			actions[index].append(action)
 			self.menu.addAction(action)
+			if 1==actions[index][4]:
+				self.menu.addSeparator()
 		#print self.titleBar
 		#print self.titleBar.getControl('menuButton')
 		#self.titleBar.getControl('menuButton').setMenu(self.menu)
@@ -61,7 +63,7 @@ class ThCloudDiskWindow(thframe.ThFrame):
 		#self.titleBar.menuButton.setArrowType(QtCore.Qt.NoArrow)
 		#self.titleBar.menuButton.setPopupMode(QtGui.QToolButton.MenuButtonPopup)
 		self.titleBar.menuButton.setMenu(self.menu)
-		#self.titleBar.menuButton.clicked.connect(self.titleBar.menuButton.showMenu)
+		self.titleBar.menuButton.clicked.connect(self.titleBar.menuButton.showMenu)
 
 		self.toolbar=thtoolbar.ThToolBar(self.application,self)
 		self.toolbar.setMouseTracking(True)

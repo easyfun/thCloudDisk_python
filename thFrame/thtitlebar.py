@@ -54,8 +54,9 @@ class ThTitleBar(QtGui.QFrame):
 		#self.maxButton.setIconSize(QtCore.QSize(self.height()-3,self.height()-3))
 		self.maxButton.setIconSize(QtCore.QSize(20,20))
 
-		self.menuButton.setArrowType(QtCore.Qt.NoArrow)
+		#self.menuButton.setArrowType(QtCore.Qt.NoArrow)
 		#self.menuButton.setPopupMode(QtGui.QToolButton.MenuButtonPopup)
+		self.menuButton.setStyleSheet("QToolButton::menu-indicator{image:None;}")
 
 
 		self.controlDict={
