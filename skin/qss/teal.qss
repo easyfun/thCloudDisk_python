@@ -68,6 +68,7 @@ QPushButton#HeadPicture:flat{
 }*/
 
 QPushButton#CloudDisk{
+	color:black;
 	background-image:url(skin/icon_images/toolbar.skydrive_48.png);
 	background-repeat:no-repeat;
 	background-origin:content;
@@ -96,6 +97,7 @@ QPushButton#CloudDisk:flat{
 
 QPushButton#CloudAlbum{
 	background-image:url(skin/icon_images/toolbar.album_48.png);
+	color:black;
 	background-repeat:no-repeat;
 	background-origin:content;
 	background-position:top;
@@ -123,6 +125,7 @@ QPushButton#CloudAlbum:flat{
 
 QPushButton#SharedAlum{
 	background-image:url(skin/icon_images/toolbar.shared_album_48.png);
+	color:black;
 	background-repeat:no-repeat;
 	background-origin:content;
 	background-position:top;
@@ -150,6 +153,7 @@ QPushButton#SharedAlum:flat{
 
 QPushButton#AllFuction{
 	background-image:url(skin/icon_images/toolbar.all_function_48.png);
+	color:black;
 	background-repeat:no-repeat;
 	background-origin:content;
 	background-position:top;
@@ -176,6 +180,7 @@ QPushButton#AllFuction:flat{
 }*/
 
 QPushButton#LogoPicture{
+	color:black;
 	background-image:url(./skin/icons/appbar.loop.png);
 	background-repeat:no-repeat;
 	background-position:center bottom;
